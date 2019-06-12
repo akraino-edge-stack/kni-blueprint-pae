@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#set -x
+set -e
+
+LOG_LEVEL=${LOG_LEVEL:-debug}
+WORK_DIR=${WORK_DIR:-$HOME/.kni}
+
+BLUEPRINT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. >/dev/null 2>&1 && pwd )"
+
+SITE_CONFIG=$1
+SITE_NAME=$(basename ${SITE_CONFIG})
+
+# do some sanity checking
+if [ $# -ne 1 ]; then
+    1>&2 echo "Destroys a previously created site.
+
+Usage: $(basename $0) <site_config>
+
+    <site_config>   directory containing the site's configs"
+    exit 1
+fi
+
+if [ ! -f ${WORK_DIR}/${SITE_NAME}/metadata.json ]; then
+    1>&2 echo "Could not find ${WORK_DIR}/${SITE_NAME}/metadata.json. Maybe site hasn't been created yet?"
+    exit 1
+fi
+
+# look up profile used by the site to be deployed
+PROFILE=$(grep -Eoh "profiles/([A-Za-z0-9.-])+" ${SITE_CONFIG}/00_install-config/*)
+PROFILE=${PROFILE##*/}
+
+# look up the installer version for this profile
+INSTALLER_URL=$(grep "${PROFILE}" ${BLUEPRINT_DIR}/requirements.yaml)
+INSTALLER_URL=${INSTALLER_URL#*: }
+INSTALLER=$(basename ${INSTALLER_URL%\?*} .tar.gz)
+if [[ "${INSTALLER}" == *.git ]]; then
+    INSTALLER=openshift-install-dev-${INSTALLER_URL#*\?ref=}
+fi
+INSTALLER=${WORK_DIR}/${INSTALLER}
+
+${INSTALLER} destroy cluster --dir=${WORK_DIR}/${SITE_NAME} --log-level ${LOG_LEVEL}

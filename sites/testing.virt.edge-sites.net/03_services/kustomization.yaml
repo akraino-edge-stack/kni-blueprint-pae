@@ -1,0 +1,2 @@
+bases:
+- ../../../profiles/testing.libvirt/03_services

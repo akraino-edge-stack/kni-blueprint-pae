@@ -1,0 +1,2 @@
+bases:
+- ../../../profiles/testing.libvirt/02_cluster-addons
