@@ -1,0 +1,115 @@
+#!/usr/bin/env python3
+
+import argparse
+import collections
+import logging
+import os
+import shutil
+import sys
+
+from utils import manif
+
+logger = logging.getLogger()
+
+def name_from_gvkn(gvkn):
+    """ Takes a G/V/K|N string and returns a g-k-n string. """
+    gvk_n = gvkn.split('|')
+    g_v_k = gvk_n[0].split('/')
+    name = g_v_k[2] + "-" + gvk_n[1]
+    if g_v_k[0] != "~G":
+        name = g_v_k[0] + "-" + name
+    return name.lower()
+
+def get_assets(basedir):
+    """ Return a list of (.yaml|.yml) filenames prefixed by the dir they're in. """
+    assets = []
+    files = os.listdir(os.path.join(basedir, "manifests"))
+    files = [os.path.join("manifests", f) for f in files]
+    assets.extend(files)
+    files = os.listdir(os.path.join(basedir, "openshift"))
+    files = [os.path.join("openshift", f) for f in files]
+    assets.extend(files)
+    assets = [f for f in assets if f.endswith(".yaml") or f.endswith(".yml")]
+    return assets
+
+def merge_manifests(asset_dir, kustomized_manifests):
+    """ Writes updated or added manifests out to <asset_dir> """
+    assets = get_assets(asset_dir)
+
+    # Check each file in <asset_dir> whether <manifests> has an updated version
+    # of it and if so, replace the file with the updated version.
+    processed_gvkns = {}
+    for f in assets:
+        original_manifest = manif.load(os.path.join(asset_dir, f))
+        gvkn = manif.get_gvkn(original_manifest, recurse_lists=True)
+
+        if isinstance(gvkn, list):
+            modified = False
+            for m in original_manifest["items"]:
+                gvkn = manif.get_gvkn(m)
+                if gvkn in kustomized_manifests:
+                    if m != manif.read_obj(kustomized_manifests[gvkn]):
+                        modified = True
+                        break
+            if modified:
+                logger.info("Blueprint modified manifest {0} in file {1}.".format(gvkn, f))
+                shutil.move(
+                    os.path.join(asset_dir, f),
+                    os.path.join(asset_dir, f + ".orig"))
+                with open(os.path.join(asset_dir, f), 'w') as fd:
+                    fd.write("kind: List\n")
+                    fd.write("apiVersion: v1\n")
+                    fd.write("metadata:\n")
+                    fd.write("  resourceVersion: \"\"\n")
+                    fd.write("  selfLink: \"\"\n")
+                    fd.write("items:\n")
+                    for m in original_manifest["items"]:
+                        gvkn = manif.get_gvkn(m)
+                        if gvkn in kustomized_manifests:
+                            c = 0
+                            for line in kustomized_manifests[gvkn]:
+                                if c == 0:
+                                    fd.write("- " + line)
+                                else:
+                                    fd.write("  " + line)
+                                c += 1
+        else:
+            if gvkn in kustomized_manifests:
+                kustomized_manifest = manif.read_obj(kustomized_manifests[gvkn])
+                if kustomized_manifest != original_manifest:
+                    logger.info("Blueprint modified manifest {0} in file {1}.".format(gvkn, f))
+                    shutil.move(
+                        os.path.join(asset_dir, f),
+                        os.path.join(asset_dir, f + ".orig"))
+                    with open(os.path.join(asset_dir, f), 'w') as fd:
+                        fd.write(kustomized_manifests[gvkn])
+
+        processed_gvkns[gvkn] = True
+
+    # Find manifests not yet in <asset_dir> and write them out.
+    count = 0
+    for k, v in kustomized_manifests.items():
+        gvkn = manif.get_gvkn(manif.read_obj(v))
+        if gvkn not in processed_gvkns:
+            fname = "99_{0:0>4d}_{1}.yaml".format(count, name_from_gvkn(gvkn))
+            logger.info("Blueprint added manifest {0}. Writing to {1}.".format(gvkn, fname))
+            with open(os.path.join(asset_dir, "manifests", fname), 'w') as fd:
+                fd.write(manifest)
+            count += 1
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Update openshift-installer assets with kustomized manifests.')
+    parser.add_argument('--dir', type=str, required=True,
+                        help='Directory to write output to.')
+    args = parser.parse_args()
+
+    kustomized_manifests = collections.OrderedDict()
+    for doc in manif.read_all_docs(sys.stdin):
+        manifest = manif.read_obj(doc)
+        if manifest and isinstance(manifest, dict):
+            gvkn = manif.get_gvkn(manifest, recurse_lists=True)
+            if isinstance(gvkn, list) and len(gvkn) == 1:
+                gvkn = gvkn[0]
+            kustomized_manifests[str(gvkn)] = doc.rstrip('\n')
+    merge_manifests(args.dir, kustomized_manifests)

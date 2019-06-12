@@ -1,0 +1,29 @@
+apiVersion: v1beta3
+baseDomain: example.com
+compute:
+- name: worker
+  platform: {}
+  replicas: 3
+controlPlane:
+  name: master
+  platform: {}
+  replicas: 3
+kind: InstallConfig
+metadata:
+  creationTimestamp: null
+  name: site-01
+networking:
+  clusterNetworks:
+  - cidr: 10.128.0.0/14
+    hostSubnetLength: 9
+  machineCIDR: 192.168.126.0/24
+  serviceCIDR: 172.30.0.0/16
+  type: OpenShiftSDN
+platform:
+  libvirt:
+    URI: qemu+tcp://192.168.122.1/system
+    network:
+      if: tt0
+pullSecret: '{"auths":{"cloud.openshift.com":{"auth":"0123456789=","email":"user@exampe.com"},"quay.io":{"auth":"0123456789=","email":"user@example.com"},"registry.connect.redhat.com":{"auth":"0123456789","email":"user@example.com"}}}'
+sshKey: |
+  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDo8udAzagmr4f6yoWhzsDnu3x0AqigToYDewN1iy2FLaZGK2qgZ1WQ4MUZGXoYQj5AaRTSQes0W8n0nKjhHtPwsqPvMyhhVUgm919WBhVHd8SGEA2eDmJx1WDPuiz5yk72iqcbl8l3Gduew+8EBdEtioawQIVg8DNjaTlc1NQ0qw== user@example.com
