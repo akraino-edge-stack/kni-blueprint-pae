@@ -1,9 +1,0 @@
-settings:
-  baseDomain: "tt.testing"
-  clusterName: "test"
-  clusterCIDR: "10.128.0.0/14"
-  clusterSubnetLength: 9
-  machineCIDR: "192.168.126.0/24"
-  serviceCIDR: "172.30.0.0/16"
-  SDNType: "OpenShiftSDN"
-  libvirtURI: "qemu+tcp://192.168.122.1/system"

@@ -1,0 +1,2 @@
+bases:
+- ../../../profiles/production.aws/02_cluster-addons
