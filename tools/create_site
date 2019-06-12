@@ -1,0 +1,117 @@
+#!/bin/bash
+
+#set -x
+set -e
+
+# If DRY_RUN=true, creates and modifies the installer manifests, but stops
+# right before actually creating the cluster.
+DRY_RUN=${DRY_RUN:-false}
+# Log level passed through to the openshift-installer
+LOG_LEVEL=${LOG_LEVEL:-debug}
+# If PUSH_MODE=true, perfoms Day 2 operations (01_cluster-addons, 02_services)
+# by pushing the respective manifests to the remote cluster.
+# If PUSH_MODE=false, assumes the remote cluster will pull in Day 2 config
+# changes itself.
+PUSH_MODE=${PUSH_MODE:-false}
+# Directory where secrets, binaries, and site config dirs are stored.
+WORK_DIR=${WORK_DIR:-$HOME/.kni}
+
+BLUEPRINT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. >/dev/null 2>&1 && pwd )"
+
+SITE_CONFIG=$1
+SITE_NAME=$(basename ${SITE_CONFIG})
+
+# do some sanity checking
+if [ $# -ne 1 ]; then
+    1>&2 echo "Creates a new site from the specified blueprint and site-config.
+
+Usage: $(basename $0) <site_config>
+
+    <site_config>   directory containing the site's configs"
+    exit 1
+fi
+
+if [ ! -d ${SITE_CONFIG} ]; then
+    1>&2 echo "Site config dir ${SITE_CONFIG} does not exist."
+    exit 1
+fi
+
+if [ ! -f ${WORK_DIR}/pull-secret.json ]; then
+    1>&2 echo "No pull-secret.json found in ${WORK_DIR}."
+    exit 1
+fi
+
+if [ ! -f ${WORK_DIR}/id_rsa.pub ]; then
+    1>&2 echo "No SSH public key (id_rsa.pub) found in ${WORK_DIR}. Generating keypair."
+    ssh-keygen -b 2048 -f ${WORK_DIR}/id_rsa -C user@example.com -q -N ""
+fi
+
+# look up profile used by the site to be deployed
+PROFILE=$(grep -Eoh "profiles/([A-Za-z0-9.-])+" ${SITE_CONFIG}/00_install-config/*)
+PROFILE=${PROFILE##*/}
+
+# look up the installer version for this profile
+INSTALLER_URL=$(grep "${PROFILE}" ${BLUEPRINT_DIR}/requirements.yaml)
+INSTALLER_URL=${INSTALLER_URL#*: }
+INSTALLER=$(basename ${INSTALLER_URL%\?*} .tar.gz)
+if [[ "${INSTALLER}" == *.git ]]; then
+    INSTALLER=openshift-install-dev-${INSTALLER_URL#*\?ref=}
+fi
+INSTALLER=${WORK_DIR}/${INSTALLER}
+
+# look up the kustomize version for this blueprint
+KUSTOMIZE_URL=$(grep kustomize ${BLUEPRINT_DIR}/requirements.yaml)
+KUSTOMIZE_URL=${KUSTOMIZE_URL#*: }
+KUSTOMIZE=$(basename ${KUSTOMIZE_URL%\?*} .tar.gz)
+if [[ "${KUSTOMIZE}" == *.git ]]; then
+    KUSTOMIZE=kustomize-dev-${KUSTOMIZE_URL#*\?ref=}
+fi
+KUSTOMIZE=${WORK_DIR}/${KUSTOMIZE}
+
+# enable kustomize plugins
+KUSTOMIZE_FLAGS="--enable_alpha_plugins"
+export XDG_CONFIG_HOME=${BLUEPRINT_DIR}/tools
+
+# lookup any deployment overrides
+RELEASE_IMAGE_OVERRIDE=$(grep -Eh "releaseImageOverride" ${SITE_CONFIG}/00_install-config/site-config.yaml)
+RELEASE_IMAGE_OVERRIDE=${RELEASE_IMAGE_OVERRIDE#*: }
+if [[ RELEASE_IMAGE_OVERRIDE != "" ]]; then
+    export OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE=${RELEASE_IMAGE_OVERRIDE}
+fi
+export TF_VAR_libvirt_master_memory=8192
+export TF_VAR_libvirt_master_vcpu=4
+
+# generate openshift-install manifests based on phase '00_install-config'
+mkdir -p ${WORK_DIR}/${SITE_NAME}
+${KUSTOMIZE} build ${KUSTOMIZE_FLAGS} ${SITE_CONFIG}/00_install-config > ${WORK_DIR}/${SITE_NAME}/install-config.yaml
+${INSTALLER} create manifests --dir=${WORK_DIR}/${SITE_NAME} --log-level ${LOG_LEVEL}
+
+# create virtual base dir '00_cluster' for phase '01_cluster-mods' kustomization
+pushd ${WORK_DIR}/${SITE_NAME} > /dev/null
+echo "resources:" > kustomization.yaml
+for f in $(ls manifests/*.yaml manifests/*.yml openshift/*.yaml); do
+    echo "- $f" >> kustomization.yaml
+done
+popd > /dev/null
+ln -sfn ${WORK_DIR}/${SITE_NAME} ${BLUEPRINT_DIR}/base/00_cluster
+
+# update openshift-install manifests based on phase '01_cluster-mods' kustomization
+${KUSTOMIZE} build ${KUSTOMIZE_FLAGS} ${SITE_CONFIG}/01_cluster-mods \
+    | ${BLUEPRINT_DIR}/tools/modify_installer_manifests --dir=${WORK_DIR}/${SITE_NAME}
+
+# create the cluster, unless $DRY_RUN has been set to true
+if [ "$DRY_RUN" = false ]; then
+    ${INSTALLER} create cluster --dir=${WORK_DIR}/${SITE_NAME} --log-level ${LOG_LEVEL}
+    if ${INSTALLER} wait-for &> /dev/null; then
+        ${INSTALLER} wait-for install-complete --dir=${WORK_DIR}/${SITE_NAME} --log-level ${LOG_LEVEL}
+        echo "Installation complete!"
+    fi
+
+    if [ "$PUSH_MODE" = true ]; then
+        export KUBECONFIG=${WORK_DIR}/${SITE_NAME}/auth/kubeconfig
+        ${KUSTOMIZE} build ${KUSTOMIZE_FLAGS} ${SITE_CONFIG}/02_cluster-addons \
+            | ${WORK_DIR}/kubectl apply -f -
+        ${KUSTOMIZE} build ${KUSTOMIZE_FLAGS} ${SITE_CONFIG}/03_services \
+            | ${WORK_DIR}/kubectl apply -f -
+    fi
+fi

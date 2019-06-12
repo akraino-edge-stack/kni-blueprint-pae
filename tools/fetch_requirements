@@ -1,0 +1,160 @@
+#!/bin/bash
+
+#set -x
+set -e
+
+: "${OC_URL:=https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.1.0/openshift-client-linux-4.1.0.tar.gz}"
+: "${WORK_DIR:=$HOME/.kni}"
+
+BLUEPRINT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. >/dev/null 2>&1 && pwd )"
+
+if [ $# -ne 0 ]; then
+    1>&2 echo "Fetches a blueprint's requirements (based on requirements.yaml).
+
+Usage: $(basename $0)"
+    exit 1
+fi
+
+mkdir -p "${WORK_DIR}"
+
+function build_installer {
+# Build an openshift-install binary from source.
+# ARTIFACT is the name to be given to the binary.
+# URL refers to the git repo to clone from.
+# REF is the git ref to checkout.
+    local ARTIFACT=$1
+    local URL=$2
+    local REF=$3
+
+    TMP_DIR=$(mktemp -d)
+    pushd "$TMP_DIR" > /dev/null
+    export GOPATH=${TMP_DIR}/go
+    mkdir -p "${GOPATH}/src/github.com/openshift"
+    cd "${GOPATH}/src/github.com/openshift"
+    git clone "${URL}"
+    cd installer
+    git checkout ${REF}
+    TAGS=libvirt hack/build.sh
+    mv bin/openshift-install ${WORK_DIR}/${ARTIFACT}
+    popd > /dev/null
+    /bin/rm -rf "$TMP_DIR"
+}
+
+function build_kustomize {
+# Build a kustomize binary from source.
+# ARTIFACT is the name to be given to the binary.
+# URL refers to the git repo to clone from.
+# REF is the git ref to checkout.
+    local ARTIFACT=$1
+    local URL=$2
+    local REF=$3
+
+    TMP_DIR=$(mktemp -d)
+    pushd "$TMP_DIR" > /dev/null
+    mkdir ${TMP_DIR}/go
+    GOPATH=${TMP_DIR}/go go get -v sigs.k8s.io/kustomize
+    mv go/bin/kustomize ${WORK_DIR}/${ARTIFACT}
+    popd > /dev/null
+    /bin/rm -rf "$TMP_DIR"
+}
+
+function fetch_requirement {
+# Fetches a single requirement (installer or kustomize)
+# PROFILE is the key of an entry in "requirements.yaml". It must match either
+# a directory named "profiles/$PROFILE" in the blueprint or be equal to
+# "kustomize".
+# URL and REF are parsed from the value in "requirements.yaml", which is
+# assumed to be in "go-getter" format.
+# (https://github.com/hashicorp/go-getter)
+    local PROFILE=$1
+    local URL=${2%\?*}
+    local REF=${2#*\?ref=}
+
+    if [ "${PROFILE}" == "kustomize" ]; then
+        KUSTOMIZE=$(basename ${URL%\?*} .tar.gz)
+        if [[ "${KUSTOMIZE}" == *.git ]]; then
+            KUSTOMIZE=kustomize-dev-${REF}
+        fi
+
+        if [ -f "${WORK_DIR}/${KUSTOMIZE}" ]; then
+            1>&2 echo "Using existing ${WORK_DIR}/${KUSTOMIZE}."
+        else
+            case "${URL}" in
+            *.tar.gz )
+                1>&2 echo "Pulling ${KUSTOMIZE} tarball from ${URL}."
+                TMP_DIR=$(mktemp -d)
+                pushd "$TMP_DIR" > /dev/null
+                curl -L ${URL} -o kustomize.tar.gz
+                tar -xf kustomize.tar.gz
+                mv kustomize ${WORK_DIR}/${INSTALLER}
+                popd > /dev/null
+                /bin/rm -rf "$TMP_DIR"
+                ;;
+            *.git )
+                1>&2 echo "Building ${ARTIFACT} from ${URL}."
+                build_kustomize ${KUSTOMIZE} ${URL} ${REF}
+                ;;
+            * )
+                1>&2 echo "Pulling ${KUSTOMIZE} binary from ${URL}."
+                curl -L ${URL} -o ${WORK_DIR}/${KUSTOMIZE}
+                chmod a+x ${WORK_DIR}/${KUSTOMIZE}
+                ;;
+            esac
+        fi
+    else
+        INSTALLER=$(basename ${URL%\?*} .tar.gz)
+        if [[ "${INSTALLER}" == *.git ]]; then
+            INSTALLER=openshift-install-dev-${REF}
+        fi
+
+        1>&2 echo -n "Profile ${PROFILE}: "
+        if [ -f "${WORK_DIR}/${INSTALLER}" ]; then
+            1>&2 echo "Using existing ${WORK_DIR}/${INSTALLER}."
+        else
+            case "${URL}" in
+            *.tar.gz )
+                1>&2 echo "Pulling ${INSTALLER} tarball from ${URL}."
+                TMP_DIR=$(mktemp -d)
+                pushd "$TMP_DIR" > /dev/null
+                curl -L ${URL} -o installer.tar.gz
+                tar -xf installer.tar.gz
+                mv openshift-install ${WORK_DIR}/${INSTALLER}
+                popd > /dev/null
+                /bin/rm -rf "$TMP_DIR"
+                ;;
+            *.git )
+                1>&2 echo "Building ${INSTALLER} from ${URL}."
+                build_installer ${INSTALLER} ${URL} ${REF}
+                ;;
+            * )
+                1>&2 echo "Pulling ${INSTALLER} binary from ${URL}."
+                curl -L ${URL} -o ${WORK_DIR}/${INSTALLER}
+                ;;
+            esac
+        fi
+    fi
+}
+
+function install_clients {
+    TMP_DIR=$(mktemp -d)
+    pushd "$TMP_DIR" > /dev/null
+    # install oc client and alias to kubectl
+    1>&2 echo "Pulling oc tarball from ${OC_URL}."
+    curl -L ${OC_URL} -o oc.tar.gz
+    tar -xf oc.tar.gz oc
+    mv oc ${WORK_DIR}/oc
+    ln -sf ${WORK_DIR}/oc ${WORK_DIR}/kubectl
+    popd > /dev/null
+    /bin/rm -rf "$TMP_DIR"
+}
+
+# Parses lines in "requirements.yaml" to fetch KV-pairs of
+# profile names (or "kustomize" mapping to URLs to fetch the binaries/source
+# from. URLs are expected to be in go-getter format.
+# (https://github.com/hashicorp/go-getter)
+while IFS="" read -r line || [ -n "$line" ]
+do
+    fetch_requirement ${line%: *} ${line#*: }
+done <${BLUEPRINT_DIR}/requirements.yaml
+
+install_clients
