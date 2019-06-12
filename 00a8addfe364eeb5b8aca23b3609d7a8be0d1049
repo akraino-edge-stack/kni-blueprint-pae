@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9989f6a8_32eb9f94",
+        "filename": "base/01_cluster-mods/kustomization.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 169
+      },
+      "writtenOn": "2019-06-12T17:14:51Z",
+      "side": 1,
+      "message": "Ah, I see where it is created in \"create_site\".",
+      "parentUuid": "0fed24c4_cf3b69df",
+      "revId": "00a8addfe364eeb5b8aca23b3609d7a8be0d1049",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "763e7ac3_91b239ec",
         "filename": "base/02_cluster-addons/00_kubevirt/00_kubevirt-operator.yaml",
         "patchSetId": 1
