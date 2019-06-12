@@ -16,6 +16,23 @@
       "revId": "00a8addfe364eeb5b8aca23b3609d7a8be0d1049",
       "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "763e7ac3_91b239ec",
+        "filename": "base/02_cluster-addons/00_kubevirt/00_kubevirt-operator.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 169
+      },
+      "writtenOn": "2019-06-12T14:51:35Z",
+      "side": 1,
+      "message": "Maybe fix the indentation of this section to follow the style used in 43-55 above?",
+      "revId": "00a8addfe364eeb5b8aca23b3609d7a8be0d1049",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
     }
   ]
 }
