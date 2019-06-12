@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "dc889014_f4b5b34e",
+        "filename": "base/01_cluster-mods/kustomization.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 151
+      },
+      "writtenOn": "2019-06-12T20:11:01Z",
+      "side": 1,
+      "message": "Exactly. Idea is that the stage \u002701_cluster-mods\u0027 is a kustomization on top of the default manifests created by \"openshift-install create manifests\", which is the output of stage \u002700_install-config\u0027. \u0027create_site\u0027 renders the default manifests into ${WORK_DIR}/${SITE_NAME} and then symlinks \u002700_cluster\u0027 to that.",
+      "parentUuid": "9989f6a8_32eb9f94",
+      "revId": "00a8addfe364eeb5b8aca23b3609d7a8be0d1049",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "763e7ac3_91b239ec",
         "filename": "base/02_cluster-addons/00_kubevirt/00_kubevirt-operator.yaml",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2019-06-12T14:51:35Z",
       "side": 1,
       "message": "Maybe fix the indentation of this section to follow the style used in 43-55 above?",
+      "revId": "00a8addfe364eeb5b8aca23b3609d7a8be0d1049",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62348989_5506dd4d",
+        "filename": "base/02_cluster-addons/00_kubevirt/00_kubevirt-operator.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 151
+      },
+      "writtenOn": "2019-06-12T20:11:01Z",
+      "side": 1,
+      "message": "Yeah, that\u0027d look cleaner. I\u0027ve merely pulled this file from https://github.com/kubevirt/kubevirt/releases/download/v0.18.0/kubevirt-operator.yaml without changes, though.",
+      "parentUuid": "763e7ac3_91b239ec",
       "revId": "00a8addfe364eeb5b8aca23b3609d7a8be0d1049",
       "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
       "unresolved": true
