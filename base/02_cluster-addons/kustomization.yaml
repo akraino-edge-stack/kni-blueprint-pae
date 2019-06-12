@@ -1,0 +1,3 @@
+resources:
+- 00_kubevirt/00_kubevirt-operator.yaml
+- 00_kubevirt/01_kubevirt-cr.yaml

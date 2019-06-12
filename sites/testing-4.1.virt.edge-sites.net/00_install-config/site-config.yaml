@@ -1,0 +1,6 @@
+apiVersion: kni.akraino.org/v1alpha1
+kind: SiteConfig
+metadata:
+  name: notImportantHere
+config:
+  releaseImageOverride: registry.svc.ci.openshift.org/origin/release:4.1
