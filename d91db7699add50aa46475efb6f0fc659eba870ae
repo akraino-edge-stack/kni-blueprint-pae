@@ -1,0 +1,356 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae009ad0_b9886f4d",
+        "filename": "base/00_install-config/.gitkeep",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "what\u0027s this file?",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19251133_c9cca980",
+        "filename": "base/02_cluster-addons/00_kubevirt/01_kubevirt-cr.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "I think it makes sense to put some README/comments , referencing the upstream manifests on what this is based. So it is easier to keep a reference for update.",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92cbe293_613b99ce",
+        "filename": "profiles/testing.libvirt/00_install-config/install-config.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "If we have a full install-config.yaml for each profile, why do we also have one on base? As a reference? Maybe you can add some comment explaining it",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01ad1148_bbc4629a",
+        "filename": "sites/testing.virt.edge-sites.net/00_install-config/kustomization.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "Generally, i\u0027d like to see some comments explaining on the meaning of the patches",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d599ecd4_5d5a863b",
+        "filename": "tools/create_site",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "i\u0027d like to see comments explaining the parameters...",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f07a266_44ca99c7",
+        "filename": "tools/create_site",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "this should be parameterized?",
+      "range": {
+        "startLine": 38,
+        "startChar": 52,
+        "endLine": 38,
+        "endChar": 53
+      },
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51e09128_c2c8f5ef",
+        "filename": "tools/create_site",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "what is the purpose of this comparison?",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe3f9b43_dd3f9dc6",
+        "filename": "tools/create_site",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "parameterize it as well?",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4d212df_cb2c51eb",
+        "filename": "tools/destroy_site",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "we have a similar destroy command with the make clean of kni-installer. How are we going to integrate both tools? Should we integrate it on the main binary?",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2001954_b805241b",
+        "filename": "tools/fetch_requirements",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "same, we have a make binary call on kni-installer that does the same",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e17dfaa3_478fb403",
+        "filename": "tools/fetch_requirements",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "do we integrate that with the kni-installer a well?",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de20a264_4008dd8a",
+        "filename": "tools/fetch_requirements",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "can you add some comments on the purpose of this method?",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b83ca265_0bd5714d",
+        "filename": "tools/fetch_requirements",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "why is that comparison between PROFILE customize and others?",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4a19755_7aab031c",
+        "filename": "tools/fetch_requirements",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "same, can we integrate it on the binary?",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6dad710_dfd71397",
+        "filename": "tools/generate_blueprint",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "python here, and we already have code in go... how do we integrate this?",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64c6269d_4f834529",
+        "filename": "tools/kustomize/plugin/kni.akraino.org/v1alpha1/siteconfig/SiteConfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "can you comment on the purpose of this file?",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3e27361_b93388c5",
+        "filename": "tools/modify_installer_manifests",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "gvkn? can you describe on this method?",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec2dba08_55cb07f3",
+        "filename": "tools/modify_installer_manifests",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "you see, gerrit doesn\u0027t like those spaces",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 8
+      },
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "032344e8_4186b642",
+        "filename": "tools/utils/env.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "wow, that\u0027s dense. Can you define some key/value list, and do a loop iterating over it?",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0151603f_06d34523",
+        "filename": "tools/utils/manif.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-06-14T09:30:38Z",
+      "side": 1,
+      "message": "can you comment on the purpose of that method?",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    }
+  ]
+}
