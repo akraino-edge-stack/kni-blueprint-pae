@@ -503,6 +503,24 @@
     },
     {
       "key": {
+        "uuid": "2028a337_34d39922",
+        "filename": "tools/generate_blueprint",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-06-17T11:54:57Z",
+      "side": 1,
+      "message": "Well, that was the target all along, wasn\u0027t it? \nI\u0027ve always pictured the kni-edge-installer as a binary/cli in order to execute automated tasks.",
+      "parentUuid": "68cc33dd_8e97dc71",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "64c6269d_4f834529",
         "filename": "tools/kustomize/plugin/kni.akraino.org/v1alpha1/siteconfig/SiteConfig",
         "patchSetId": 2
@@ -620,6 +638,29 @@
     },
     {
       "key": {
+        "uuid": "b04faa46_5f21c049",
+        "filename": "tools/modify_installer_manifests",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-06-17T11:54:57Z",
+      "side": 1,
+      "message": "These ones either.",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 4
+      },
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "032344e8_4186b642",
         "filename": "tools/utils/env.py",
         "patchSetId": 2
@@ -649,6 +690,24 @@
       "side": 1,
       "message": "Yeah... probably cleaner. Then again, this file is a left-over from an earlier attempt where i still had to turn auto-generated manifests into templates, which is no longer the case. So I should probably remove this file completely instead.",
       "parentUuid": "032344e8_4186b642",
+      "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c747e98b_2b64b4fd",
+        "filename": "tools/utils/env.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-06-17T11:54:57Z",
+      "side": 1,
+      "message": "Agree. If this is not use, let\u0027s get rid of it.",
+      "parentUuid": "8b473057_ed9b14ef",
       "revId": "d91db7699add50aa46475efb6f0fc659eba870ae",
       "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
       "unresolved": false
