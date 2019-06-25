@@ -73,9 +73,9 @@ KUSTOMIZE_FLAGS="--enable_alpha_plugins"
 export XDG_CONFIG_HOME=${BLUEPRINT_DIR}/tools
 
 # lookup any deployment overrides
-RELEASE_IMAGE_OVERRIDE=$(grep -Eh "releaseImageOverride" ${SITE_CONFIG}/00_install-config/site-config.yaml)
+RELEASE_IMAGE_OVERRIDE=$(grep -Eh "releaseImageOverride" ${SITE_CONFIG}/00_install-config/site-config.yaml) || true
 RELEASE_IMAGE_OVERRIDE=${RELEASE_IMAGE_OVERRIDE#*: }
-if [[ RELEASE_IMAGE_OVERRIDE != "" ]]; then
+if [[ "${RELEASE_IMAGE_OVERRIDE}" != "" ]]; then
     export OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE=${RELEASE_IMAGE_OVERRIDE}
 fi
 export TF_VAR_libvirt_master_memory=8192
