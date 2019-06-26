@@ -68,8 +68,8 @@ if [[ "${KUSTOMIZE}" == *.git ]]; then
 fi
 KUSTOMIZE=${WORK_DIR}/${KUSTOMIZE}
 
-# enable kustomize plugins
-KUSTOMIZE_FLAGS="--enable_alpha_plugins"
+# enable kustomize plugins and no reorder
+KUSTOMIZE_FLAGS="--enable_alpha_plugins --reorder none"
 export XDG_CONFIG_HOME=${BLUEPRINT_DIR}/tools
 
 # lookup any deployment overrides
