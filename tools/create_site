@@ -67,9 +67,11 @@ if [[ "${KUSTOMIZE}" == *.git ]]; then
     KUSTOMIZE=kustomize-dev-${KUSTOMIZE_URL#*\?ref=}
 fi
 KUSTOMIZE=${WORK_DIR}/${KUSTOMIZE}
+MAX_RETRIES=${MAX_RETRIES:-10}
+RETRY_TIME=${RETRY_TIME:-30}
 
-# enable kustomize plugins
-KUSTOMIZE_FLAGS="--enable_alpha_plugins"
+# enable kustomize plugins and no reorder
+KUSTOMIZE_FLAGS="--enable_alpha_plugins --reorder none"
 export XDG_CONFIG_HOME=${BLUEPRINT_DIR}/tools
 
 # lookup any deployment overrides
@@ -99,6 +101,21 @@ ln -sfn ${WORK_DIR}/${SITE_NAME} ${BLUEPRINT_DIR}/base/00_cluster
 ${KUSTOMIZE} build ${KUSTOMIZE_FLAGS} ${SITE_CONFIG}/01_cluster-mods \
     | ${BLUEPRINT_DIR}/tools/modify_installer_manifests --dir=${WORK_DIR}/${SITE_NAME}
 
+function apply_kustomize {
+    echo "Applying customizations for $1"
+    output=$(${KUSTOMIZE} build ${KUSTOMIZE_FLAGS} $1)
+    if [ -z "$output" ]; then
+        echo "No customizations to apply!"
+    else
+        for i in $(seq 1 $MAX_RETRIES); do
+            # YR: temporarily use replace instead of apply to prevent
+            # failures on strategic merge until fixes on kubectl lands
+            echo "$output" | ${WORK_DIR}/kubectl replace -f - && break
+            sleep ${RETRY_TIME}
+        done
+    fi
+}
+
 # create the cluster, unless $DRY_RUN has been set to true
 if [ "$DRY_RUN" = false ]; then
     ${INSTALLER} create cluster --dir=${WORK_DIR}/${SITE_NAME} --log-level ${LOG_LEVEL}
@@ -109,9 +126,7 @@ if [ "$DRY_RUN" = false ]; then
 
     if [ "$PUSH_MODE" = true ]; then
         export KUBECONFIG=${WORK_DIR}/${SITE_NAME}/auth/kubeconfig
-        ${KUSTOMIZE} build ${KUSTOMIZE_FLAGS} ${SITE_CONFIG}/02_cluster-addons \
-            | ${WORK_DIR}/kubectl apply -f -
-        ${KUSTOMIZE} build ${KUSTOMIZE_FLAGS} ${SITE_CONFIG}/03_services \
-            | ${WORK_DIR}/kubectl apply -f -
+        apply_kustomize ${SITE_CONFIG}/02_cluster-addons
+        apply_kustomize ${SITE_CONFIG}/03_services
     fi
 fi
