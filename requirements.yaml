@@ -1,5 +1,0 @@
-testing.libvirt: https://github.com/openshift/installer.git?ref=v0.16.1
-testing-4.1.libvirt: https://github.com/openshift/installer.git?ref=release-4.1
-production.baremetal: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.1.0/openshift-install-linux-4.1.0.tar.gz
-production.aws: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.1.0/openshift-install-linux-4.1.0.tar.gz
-kustomize: https://github.com/kubernetes-sigs/kustomize/releases/download/v2.1.0/kustomize_2.1.0_linux_amd64
