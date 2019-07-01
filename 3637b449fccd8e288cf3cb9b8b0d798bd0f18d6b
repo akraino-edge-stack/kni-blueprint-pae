@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac32efe0_dcf8ca38",
+        "filename": "tools/create_site",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 151
+      },
+      "writtenOn": "2019-07-01T13:35:00Z",
+      "side": 1,
+      "message": "Remove this line (we\u0027re no longer looking up anything here).",
+      "revId": "3637b449fccd8e288cf3cb9b8b0d798bd0f18d6b",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8659cfa_5d9cfaf2",
+        "filename": "tools/fetch_requirements",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 151
+      },
+      "writtenOn": "2019-07-01T13:35:00Z",
+      "side": 1,
+      "message": "Note that $BINARY_NAME may contain the arch + version, i.e. it wouldn\u0027t be \"openshift-install\" but e.g. \"openshift-install-linux-4.1.4\" here.\n\nTherefore, would BINARY_NAME --\u003e FILE_NAME be more appropriate?\n\nAlso, I think we can also replace ${URL%\\?*} --\u003e ${URL} as the parameters are already removed on line 76.\n\nFinally, $BINARY_NAME seems only to be used in the *.tar.gz case below, so maybe move it into the case statement?",
+      "revId": "3637b449fccd8e288cf3cb9b8b0d798bd0f18d6b",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8225d1bd_eb229384",
+        "filename": "tools/fetch_requirements",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 151
+      },
+      "writtenOn": "2019-07-01T13:35:00Z",
+      "side": 1,
+      "message": "I think you\u0027re assuming ${BINARY} as name elsewhere, so can probably remove these 4 lines.",
+      "revId": "3637b449fccd8e288cf3cb9b8b0d798bd0f18d6b",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "599dea2d_dc3e0955",
+        "filename": "tools/fetch_requirements",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 151
+      },
+      "writtenOn": "2019-07-01T13:35:00Z",
+      "side": 1,
+      "message": "This should be \"${WORK_DIR}/${SITE_NAME}/${BINARY}\" (see above).",
+      "revId": "3637b449fccd8e288cf3cb9b8b0d798bd0f18d6b",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "624f1048_340d9ac8",
+        "filename": "tools/fetch_requirements",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 151
+      },
+      "writtenOn": "2019-07-01T13:35:00Z",
+      "side": 1,
+      "message": "Same.",
+      "revId": "3637b449fccd8e288cf3cb9b8b0d798bd0f18d6b",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95a45ffb_fdd4897a",
+        "filename": "tools/fetch_requirements",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 151
+      },
+      "writtenOn": "2019-07-01T13:35:00Z",
+      "side": 1,
+      "message": "not found in ${URL} --\u003e not found in ${BINARY_NAME} tarball",
+      "revId": "3637b449fccd8e288cf3cb9b8b0d798bd0f18d6b",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8953ace_b4396ab6",
+        "filename": "tools/fetch_requirements",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 151
+      },
+      "writtenOn": "2019-07-01T13:35:00Z",
+      "side": 1,
+      "message": "First param (${BINARY_NAME}) is not used above, resp. it should be ${BINARY} instead, I think.",
+      "revId": "3637b449fccd8e288cf3cb9b8b0d798bd0f18d6b",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    }
+  ]
+}
