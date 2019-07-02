@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5e0a313_1df212b1",
+        "filename": "tools/create_site",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 151
+      },
+      "writtenOn": "2019-07-02T08:31:39Z",
+      "side": 1,
+      "message": "${SITE} --\u003e ${SITE_NAME}",
+      "revId": "02a6c2bf21d92be88c334fae2a04f58ba89e27d9",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1d78f18_88783f02",
+        "filename": "tools/fetch_requirements",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 151
+      },
+      "writtenOn": "2019-07-02T08:31:39Z",
+      "side": 1,
+      "message": "Var ${BINARY_NAME} is not defined. --\u003e ${BINARY} on lines 76+77.",
+      "revId": "02a6c2bf21d92be88c334fae2a04f58ba89e27d9",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04492a09_b0e106d5",
+        "filename": "tools/fetch_requirements",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 151
+      },
+      "writtenOn": "2019-07-02T08:31:39Z",
+      "side": 1,
+      "message": "Var ${FILE_NAME} isn\u0027t defined yet and when defined on l. 86 doesn\u0027t include file extension.\n--\u003e define it as $(basename ${URL}), i.e. filename _incl._ extension, then change ll. 81, 88, 89, 94 accordingly?",
+      "revId": "02a6c2bf21d92be88c334fae2a04f58ba89e27d9",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    }
+  ]
+}
