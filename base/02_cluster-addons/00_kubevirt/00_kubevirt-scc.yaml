@@ -11,7 +11,7 @@ allowedCapabilities:
 allowedUnsafeSysctls:
 - '*'
 apiVersion: security.openshift.io/v1
-defaultAddCapabilities: null
+defaultAddCapabilities: []
 fsGroup:
   type: RunAsAny
 groups:
@@ -21,9 +21,9 @@ groups:
 kind: SecurityContextConstraints
 metadata:
   name: privileged
-priority: null
+priority: 10
 readOnlyRootFilesystem: false
-requiredDropCapabilities: null
+requiredDropCapabilities: []
 runAsUser:
   type: RunAsAny
 seLinuxContext:
