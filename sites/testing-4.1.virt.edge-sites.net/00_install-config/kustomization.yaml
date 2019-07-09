@@ -1,5 +1,5 @@
 bases:
-- ../../../profiles/testing-4.1.libvirt/00_install-config
+- git::https://gerrit.akraino.org/r/kni/blueprint-pae.git//profiles/testing-4.1.libvirt/00_install-config
 
 patches:
 - install-config.patch.yaml
