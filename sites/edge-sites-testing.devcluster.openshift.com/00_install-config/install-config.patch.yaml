@@ -2,4 +2,4 @@ apiVersion: v1
 kind: InstallConfig
 metadata:
   name: cluster
-baseDomain: aws.edge-sites.net
+baseDomain: devcluster.openshift.com
