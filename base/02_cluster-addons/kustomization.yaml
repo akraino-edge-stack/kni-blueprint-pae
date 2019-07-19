@@ -4,3 +4,10 @@ resources:
 - 00_kubevirt/02_kubevirt-cr.yaml
 - 01_cni-macvlan/00_macvlan-conf.yaml
 - 02_cni-ipvlan/00_ipvlan-conf.yaml
+- 03_nfd/0110_namespace.yaml
+- 03_nfd/0200_service_account.yaml
+- 03_nfd/0300_cluster_role.yaml
+- 03_nfd/0400_cluster_role_binding.yaml
+- 03_nfd/0500_crd.yaml
+- 03_nfd/0600_operator.yaml
+- 03_nfd/0700_cr.yaml
