@@ -1,6 +1,10 @@
 bases:
 - ../../../base/02_cluster-addons
 resources:
+- 00_config-ran/00_nodes-label-worker-ran.yaml
+- 00_config-ran/01_machine-config-worker-ran-rt.yaml
+- 00_config-ran/02_openshift-realtime-profile.yaml
+- 00_config-ran/03_modify-clusterversion.yaml
 - 01_sriov-network-operator/01_namespace.yaml
 - 01_sriov-network-operator/02_sriovnetwork_v1_sriovnetwork_crd.yaml
 - 01_sriov-network-operator/03_sriovnetwork_v1_sriovnetworknodepolicy_crd.yaml
