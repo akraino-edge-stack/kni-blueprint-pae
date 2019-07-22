@@ -1,0 +1,34 @@
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: machine-config-worker-rt
+spec:
+  config:
+    ignition:
+      version: 2.2.0
+    storage:
+      files:
+        -
+          contents:
+            source: data:text/plain;base64,IyEvYmluL2Jhc2gKc3Vic2NyaXB0aW9uLW1hbmFnZXIgcmVwb3MgLS1lbmFibGUgcmhlbC04LWZvci14ODZfNjQtcnQtcnBtcwp5dW0gZ3JvdXBpbnN0YWxsIC15IFJUCnRvdWNoIC9vcHQvcnRfZXhlY3V0ZWQ=
+            filesystem: root
+            mode: 0777
+            path: /opt/setup_rt.sh
+    systemd:
+      units:
+        -
+          contents: |
+            [Unit]
+            Description=One time service to install rt and tuned profile
+            After=network-online.target
+            ConditionPathExists=!/opt/rt_executed
+            [Service]
+            Type=oneshot
+            ExecStart=/opt/setup_rt.sh
+            [Install]
+            WantedBy=multi-user.target
+          enabled: true
+          name: install_realtime.service
