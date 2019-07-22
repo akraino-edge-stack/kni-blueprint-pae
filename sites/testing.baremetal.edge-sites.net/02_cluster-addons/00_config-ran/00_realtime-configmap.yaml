@@ -1,0 +1,12 @@
+# sample configuration for adding realtime tuned settings
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: tuned-realtime-bootloader-configmap
+  namespace: openshift-cluster-node-tuning-operator
+data:
+  test-worker-0: |
+    isolated_cores="1,2,3"
+    hugepage_size_default="2G"
+    hugepage_size="2G"
+    hugepage_num="10"
