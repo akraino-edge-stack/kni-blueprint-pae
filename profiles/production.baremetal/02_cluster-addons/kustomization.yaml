@@ -1,2 +1,4 @@
+resources:
+- 00_config-ran/00_machine-config-worker-ran-rt.yaml
 bases:
 - ../../../base/02_cluster-addons
