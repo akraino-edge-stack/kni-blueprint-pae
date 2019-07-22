@@ -1,2 +1,17 @@
+resources:
+- 00_config-ran/00_nodes-label-worker-ran.yaml
+- 00_config-ran/01_machine-config-worker-ran-rt.yaml
+- 00_config-ran/02_openshift-realtime-profile.yaml
+patchesJson6902:
+- target:
+    version: v1
+    kind: ClusterVersion
+    name: version
+  path: 00_config-ran/unmanage-tuning-operator.yaml
+- target:
+    version: v1
+    kind: Deployment
+    name: cluster-node-tuning-operator
+  path: 00_config-ran/add-custom-image-tuning-operator.yaml
 bases:
 - ../../../base/02_cluster-addons
