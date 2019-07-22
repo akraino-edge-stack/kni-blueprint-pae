@@ -1,2 +1,8 @@
 bases:
 - ../../../profiles/production.baremetal/02_cluster-addons
+patchesJson6902:
+- target:
+    version: v1
+    kind: Node
+    name: cluster-worker-0
+  path: worker-node-name.patch.yaml
