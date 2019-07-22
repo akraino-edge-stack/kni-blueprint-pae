@@ -1,0 +1,25 @@
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker-rt
+  name: 01_machine-config-worker-rt
+spec:
+  config:
+    ignition:
+      version: 2.2.0
+    storage:
+      files:
+        -
+         contents:
+            source: data:text/plain;base64,IyEvYmluL2Jhc2gKc3Vic2NyaXB0aW9uLW1hbmFnZXIgcmVwb3MgLS1lbmFibGUgcmhlbC04LWZvci14ODZfNjQtcnQtcnBtcwp5dW0gZ3JvdXBpbnN0YWxsIC15IFJUCgpjYXQgPDxFT0wgPiAvZXRjL3R1bmVkL3JlYWx0aW1lLXZhcmlhYmxlcy5jb25mCmlzb2xhdGVkX2NvcmVzPSIxOjQtMTAtMTIiCmh1Z2VwYWdlX3NpemVfZGVmYXVsdD0iMkciCmh1Z2VwYWdlX3NpemU9IjJHIgpodWdlcGFnZV9udW09IjIiCkVPTAoKY21kbGluZV9yZWFsdGltZT0iK2lzb2xjcHVzPVwke2lzb2xhdGVkX2NvcmVzfSBpbnRlbF9wc3RhdGU9ZGlzYWJsZSBub3NvZnRsb2NrdXAgbm1pX3dhdGNoZG9nPTAgYXVkaXQ9MCBtY2U9b2ZmIGt0aHJlYWRfY3B1cz0wIGlycWFmZmluaXR5PTAgc2tld190aWNrPTEgcHJvY2Vzc29yLm1heF9jc3RhdGU9MSBpZGxlPXBvbGwgaW50ZWxfaWRsZS5tYXhfY3N0YXRlPTAgaW50ZWxfcHN0YXRlPWRpc2FibGUgaW50ZWxfaW9tbXU9b2ZmIGRlZmF1bHRfaHVnZXBhZ2Vzej1cJHtodWdlcGFnZV9zaXplX2RlZmF1bHR9IGh1Z2VwYWdlc3o9XCR7aHVnZXBhZ2Vfc2l6ZX0gaHVnZXBhZ2VzPVwke2h1Z2VwYWdlX251bX0gbm9oej1vbiBub2h6X2Z1bGw9XCR7aXNvbGF0ZWRfY29yZXN9IHJjdV9ub2Nicz1cJHtpc29sYXRlZF9jb3Jlc30iCnNlZCAtaSAnc3xeY21kbGluZV9yZWFsdGltZS4qfGNtZGxpbmVfcmVhbHRpbWU9JyIke2NtZGxpbmVfcmVhbHRpbWV9Iid8JyAvdXNyL2xpYi90dW5lZC9yZWFsdGltZS90dW5lZC5jb25mCnR1bmVkLWFkbSBwcm9maWxlIHJlYWx0aW1lCnRvdWNoIC9vcHQvcnRfZXhlY3V0ZWQ=
+          filesystem: root
+          mode: 0777
+          path: /opt/setup_rt.sh
+    systemd:
+      units:
+        -
+          contents: "[Unit] Description=One time service to install rt and tuned profile After=network.target ConditionPathExists=!/opt/rt/rt_executed [Service] Type=oneshot ExecStart=/opt/rt/setup_rt.sh [Install] WantedBy=multi-user.target\n"
+          enabled: true
+          name: install_realtime.service

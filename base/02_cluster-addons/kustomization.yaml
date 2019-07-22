@@ -1,4 +1,6 @@
 resources:
+- 00_config-rt/00_machine-config-pool-worker-rt.yaml
+- 00_config-rt/01_machine-config-worker-rt.yaml
 - 00_kubevirt/00_kubevirt-scc.yaml
 - 00_kubevirt/01_kubevirt-operator.yaml
 - 00_kubevirt/02_kubevirt-cr.yaml
