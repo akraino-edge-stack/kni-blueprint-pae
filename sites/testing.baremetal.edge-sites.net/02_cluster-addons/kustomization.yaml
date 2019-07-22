@@ -1,2 +1,10 @@
 bases:
 - ../../../profiles/production.baremetal/02_cluster-addons
+resources:
+- 00_config-ran/00_realtime-configmap.yaml
+patchesJson6902:
+- target:
+    version: v1
+    kind: Node
+    name: test-worker-0
+  path: worker-node-label.patch.yaml
