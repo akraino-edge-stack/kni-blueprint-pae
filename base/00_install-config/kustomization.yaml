@@ -1,2 +1,6 @@
 resources:
 - install-config.yaml
+- rt/machine-config-pool.yaml
+
+patches:
+- rt/add-worker-to-worker-rt.yaml

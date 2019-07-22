@@ -1,0 +1,23 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 00-worker
+labels:
+  machineconfiguration.openshift.io/role: worker
+  machineconfiguration.openshift.io/role: worker-rt
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 01-worker-kubelet
+labels:
+  machineconfiguration.openshift.io/role: worker
+  machineconfiguration.openshift.io/role: worker-rt
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 99-worker-ssh
+labels:
+  machineconfiguration.openshift.io/role: worker
+  machineconfiguration.openshift.io/role: worker-rt
