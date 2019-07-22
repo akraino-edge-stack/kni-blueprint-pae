@@ -1,2 +1,5 @@
 bases:
 - ../../../profiles/production.baremetal/02_cluster-addons
+resources:
+- 00_config-ran/00_realtime-configmap.yaml
+
