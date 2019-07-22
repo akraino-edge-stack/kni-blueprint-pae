@@ -1,0 +1,34 @@
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker-ran
+  name: machine-config-worker-ran-rt
+spec:
+  config:
+    ignition:
+      version: 2.2.0
+    storage:
+      files:
+        -
+          contents:
+            source: data:text/plain;base64,IyEvYmluL2Jhc2gKc3Vic2NyaXB0aW9uLW1hbmFnZXIgcmVwb3MgLS1lbmFibGUgcmhlbC04LWZvci14ODZfNjQtcnQtcnBtcwp5dW0gZ3JvdXBpbnN0YWxsIC15IFJUCgojIGZpcnN0IHJlYWQgYW5ub3RhdGlvbnMgb2Ygbm9kZXMKQU5OT1RBVElPTlM9JChLVUJFQ09ORklHPS92YXIvbGliL2t1YmVsZXQva3ViZWNvbmZpZyBvYyBnZXQgbm9kZXMvJEhPU1ROQU1FIC1vIGdvLXRlbXBsYXRlPSd7ey5tZXRhZGF0YS5hbm5vdGF0aW9uc319JykKQU5OT1RBVElPTlM9JHtBTk5PVEFUSU9OUzo0Oi0xfQpJRlM9JyAnIHJlYWQgLXIgLWEgQU5OT1RBVElPTlNfTElTVCA8PDwgIiRBTk5PVEFUSU9OUyIKZGVjbGFyZSAtQSBSRUFMVElNRV9TRVRUSU5HUz0oKQpmb3IgQU5OT1RBVElPTiBpbiAke0FOTk9UQVRJT05TX0xJU1RbQF19OyBkbwogIGlmIFtbICRBTk5PVEFUSU9OID1+ICJrbmkuaW8vcmVhbHRpbWVfc2V0dGluZ3MuIiBdXTsgdGhlbgogICAgS0VZPSQoZWNobyAkQU5OT1RBVElPTiB8IGN1dCAtZCA6IC1mMSkKICAgIFZBTFVFPSQoZWNobyAkQU5OT1RBVElPTiB8IGN1dCAtZCA6IC1mMi0pCiAgICBSRUFMVElNRV9TRVRUSU5HU1skS0VZXT0iJFZBTFVFIgogIGZpCmRvbmUKCmNhdCA8PEVPTCA+IC9ldGMvdHVuZWQvcmVhbHRpbWUtdmFyaWFibGVzLmNvbmYKaXNvbGF0ZWRfY29yZXM9IiR7UkVBTFRJTUVfU0VUVElOR1NbImtuaS5pby9yZWFsdGltZV9zZXR0aW5ncy5pc29sYXRlZF9jb3JlcyJdfSIKaHVnZXBhZ2Vfc2l6ZV9kZWZhdWx0PSIke1JFQUxUSU1FX1NFVFRJTkdTWyJrbmkuaW8vcmVhbHRpbWVfc2V0dGluZ3MuaHVnZXBhZ2Vfc2l6ZV9kZWZhdWx0Il19IgpodWdlcGFnZV9zaXplPSIke1JFQUxUSU1FX1NFVFRJTkdTWyJrbmkuaW8vcmVhbHRpbWVfc2V0dGluZ3MuaHVnZXBhZ2Vfc2l6ZSJdfSIKaHVnZXBhZ2VfbnVtPSIke1JFQUxUSU1FX1NFVFRJTkdTWyJrbmkuaW8vcmVhbHRpbWVfc2V0dGluZ3MuaHVnZXBhZ2VfbnVtIl19IgpFT0wKCmNtZGxpbmVfcmVhbHRpbWU9Iitpc29sY3B1cz1cJHtpc29sYXRlZF9jb3Jlc30gaW50ZWxfcHN0YXRlPWRpc2FibGUgbm9zb2Z0bG9ja3VwIG5taV93YXRjaGRvZz0wIGF1ZGl0PTAgbWNlPW9mZiBrdGhyZWFkX2NwdXM9MCBpcnFhZmZpbml0eT0wIHNrZXdfdGljaz0xIHByb2Nlc3Nvci5tYXhfY3N0YXRlPTEgaWRsZT1wb2xsIGludGVsX2lkbGUubWF4X2NzdGF0ZT0wIGludGVsX3BzdGF0ZT1kaXNhYmxlIGludGVsX2lvbW11PW9mZiBkZWZhdWx0X2h1Z2VwYWdlc3o9XCR7aHVnZXBhZ2Vfc2l6ZV9kZWZhdWx0fSBodWdlcGFnZXN6PVwke2h1Z2VwYWdlX3NpemV9IGh1Z2VwYWdlcz1cJHtodWdlcGFnZV9udW19IG5vaHo9b24gbm9oel9mdWxsPVwke2lzb2xhdGVkX2NvcmVzfSByY3Vfbm9jYnM9XCR7aXNvbGF0ZWRfY29yZXN9IgpzZWQgLWkgJ3N8XmNtZGxpbmVfcmVhbHRpbWUuKnxjbWRsaW5lX3JlYWx0aW1lPSciJHtjbWRsaW5lX3JlYWx0aW1lfSInfCcgL3Vzci9saWIvdHVuZWQvcmVhbHRpbWUvdHVuZWQuY29uZgp0dW5lZC1hZG0gcHJvZmlsZSByZWFsdGltZQp0b3VjaCAvb3B0L3J0X2V4ZWN1dGVkCnJlYm9vdA==
+          filesystem: root
+          mode: 0777
+          path: /opt/setup_rt.sh
+    systemd:
+      units:
+        -
+          contents: |
+            [Unit]
+            Description=One time service to install rt and tuned profile
+            After=network-online.target
+            ConditionPathExists=!/opt/rt_executed
+            [Service]
+            Type=oneshot
+            ExecStart=/opt/setup_rt.sh
+            [Install]
+            WantedBy=multi-user.target
+          enabled: true
+          name: install_realtime.service

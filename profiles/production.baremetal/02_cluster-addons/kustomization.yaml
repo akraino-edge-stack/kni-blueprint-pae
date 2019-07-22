@@ -1,2 +1,6 @@
+resources:
+- 00_config-ran/00_nodes-label-worker-ran.yaml
+- 00_config-ran/01_machine-config-pool-worker-ran.yaml
+- 00_config-ran/02_machine-config-worker-ran-rt.yaml
 bases:
 - ../../../base/02_cluster-addons
