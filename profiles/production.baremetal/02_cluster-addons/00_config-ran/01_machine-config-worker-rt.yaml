@@ -1,0 +1,34 @@
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker-rt
+  name: machine-config-worker-rt
+spec:
+  config:
+    ignition:
+      version: 2.2.0
+    storage:
+      files:
+        -
+          contents:
+            source:  data:text/plain;base64,IyEvYmluL2Jhc2gKaWYgWyAtZiAvZXRjL2NlbnRvcy1yZWxlYXNlIF07IHRoZW4KICAgIHN1ZG8gdGVlIC9ldGMveXVtLnJlcG9zLmQvQ2VudE9TLXJ0LnJlcG8gPi9kZXYvbnVsbCA8PEVPRgojIENlbnRPUy1ydC5yZXBvCgpbcnRdCm5hbWU9Q2VudE9TLTcgLSBydApiYXNldXJsPWh0dHA6Ly9taXJyb3IuY2VudG9zLm9yZy9jZW50b3MvXCRyZWxlYXNldmVyL3J0L1wkYmFzZWFyY2gvCmdwZ2NoZWNrPTEKZ3Bna2V5PWZpbGU6Ly8vZXRjL3BraS9ycG0tZ3BnL1JQTS1HUEctS0VZLUNlbnRPUy03CkVPRgogICAgeXVtIHVwZGF0ZSAteQogICAgeXVtIHJlbW92ZSAteSB0dW5lZAogICAgeXVtIGluc3RhbGwgLXkga2VybmVsLXJ0IHJ0LXRlc3RzIHR1bmVkLXByb2ZpbGVzLXJlYWx0aW1lCmVsc2UKICAgICMgYWRkIHJpZ2h0IHJlYWx0aW1lIHBhY2thZ2UgZGVwZW5kaW5nIG9uIHZlcnNpb24KICAgIGlmIFtbICIkKGNhdCAvZXRjL3JlZGhhdC1yZWxlYXNlKSIgPX4gIk1haXBvIiBdXTsgdGhlbgogICAgICAgIHN1YnNjcmlwdGlvbi1tYW5hZ2VyIHJlcG9zIC0tZW5hYmxlIHJoZWwtNy1zZXJ2ZXItcnQtcnBtcwogICAgZWxzZQogICAgICAgIHN1YnNjcmlwdGlvbi1tYW5hZ2VyIHJlcG9zIC0tZW5hYmxlIHJoZWwtOC1mb3IteDg2XzY0LXJ0LXJwbXMKICAgIGZpCiAgICB5dW0gZ3JvdXBpbnN0YWxsIC15IFJUCmZpCgp0b3VjaCAvb3B0L3J0X2V4ZWN1dGVkCnJlYm9vdA==
+          filesystem: root
+          mode: 0777
+          path: /opt/setup_rt.sh
+    systemd:
+      units:
+        -
+          contents: |
+            [Unit]
+            Description=One time service to install rt and tuned profile
+            After=network-online.target
+            ConditionPathExists=!/opt/rt_executed
+            [Service]
+            Type=oneshot
+            ExecStart=/opt/setup_rt.sh
+            [Install]
+            WantedBy=multi-user.target
+          enabled: true
+          name: install_realtime.service
