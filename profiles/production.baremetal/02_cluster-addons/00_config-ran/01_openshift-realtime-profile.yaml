@@ -1,0 +1,71 @@
+apiVersion: tuned.openshift.io/v1
+kind: Tuned
+metadata:
+  name: realtime
+  namespace: openshift-cluster-node-tuning-operator
+spec:
+  profile:
+  - data: |
+      [main]
+      summary=Optimize systems running OpenShift realtime nodes
+      include=network-latency
+
+      [variables]
+      # User is responsible for updating variables.conf with variable content such as isolated_cores=X-Y
+      include = /var/lib/tuned/ocp-node-labels.cfg
+      isolated_cores = ${f:hex2cpulist:kni.io/realtime_settings.isolated_cores}
+
+      isolated_cores_assert_check = \\${isolated_cores}
+      # Fail if isolated_cores are not set
+      assert1=${f:assertion_non_equal:isolated_cores are set:${isolated_cores}:${isolated_cores_assert_check}}
+
+      # Non-isolated cores cpumask including offline cores
+      not_isolated_cpumask = ${f:cpulist2hex_invert:${isolated_cores}}
+      isolated_cores_expanded=${f:cpulist_unpack:${isolated_cores}}
+      isolated_cpumask=${f:cpulist2hex:${isolated_cores_expanded}}
+      isolated_cores_online_expanded=${f:cpulist_online:${isolated_cores}}
+
+      # Fail if isolated_cores contains CPUs which are not online
+      assert2=${f:assertion:isolated_cores contains online CPU(s):${isolated_cores_expanded}:${isolated_cores_online_expanded}}
+
+      [selinux]
+      avc_cache_threshold=8192
+
+      [net]
+      nf_conntrack_hashsize=131072
+
+      [sysctl]
+      net.ipv4.ip_forward=1
+      kernel.pid_max=>131072
+      net.netfilter.nf_conntrack_max=1048576
+      net.ipv4.neigh.default.gc_thresh1=8192
+      net.ipv4.neigh.default.gc_thresh2=32768
+      net.ipv4.neigh.default.gc_thresh3=65536
+      net.ipv6.neigh.default.gc_thresh1=8192
+      net.ipv6.neigh.default.gc_thresh2=32768
+      net.ipv6.neigh.default.gc_thresh3=65536
+      net.ipv4.tcp_fastopen=3
+      fs.inotify.max_user_watches=65536
+      kernel.hung_task_timeout_secs = 600
+      kernel.nmi_watchdog = 0
+      kernel.sched_rt_runtime_us = -1
+      vm.stat_interval = 10
+      kernel.timer_migration = 0
+
+      [sysfs]
+      /sys/module/nvme_core/parameters/io_timeout=4294967295
+      /sys/module/nvme_core/parameters/max_retries=10
+      /sys/bus/workqueue/devices/writeback/cpumask = ${not_isolated_cpumask}
+      /sys/devices/virtual/workqueue/cpumask = ${not_isolated_cpumask}
+      /sys/devices/system/machinecheck/machinecheck*/ignore_ce = 1
+
+      [scheduler]
+      isolated_cores=${isolated_cores}
+
+    name: openshift-realtime-node
+  recommend:
+  - priority: 30
+    profile: openshift-realtime-node
+    match:
+    - label: node-role.kubernetes.io/worker-ran
+status: {}

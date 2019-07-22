@@ -1,2 +1,5 @@
+resources:
+- 00_config-ran/00_machine-config-worker-ran-rt.yaml
+- 00_config-ran/01_openshift-realtime-profile.yaml
 bases:
 - ../../../base/02_cluster-addons
