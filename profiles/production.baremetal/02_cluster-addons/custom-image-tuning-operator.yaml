@@ -1,0 +1,8 @@
+- op: replace
+  path: /spec/template/spec/containers/0/image
+  value: quay.io/yrobla/origin-cluster-node-tuning-operator
+- op: replace
+  path: /spec/template/spec/containers/0/env/5
+  value:
+    name: CLUSTER_NODE_TUNED_IMAGE
+    value: quay.io/yrobla/cluster-node-tuned

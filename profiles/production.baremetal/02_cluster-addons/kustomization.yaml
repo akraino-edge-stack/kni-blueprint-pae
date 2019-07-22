@@ -7,7 +7,23 @@ patchesJson6902:
     kind: Config
     name: cluster
     version: v1
+- target:
+    group: config.openshift.io
+    version: v1
+    kind: ClusterVersion
+    name: version
+  path: unmanage-tuning-operator.yaml
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: cluster-node-tuning-operator
+    namespace: openshift-cluster-node-tuning-operator
+  path: custom-image-tuning-operator.yaml
+
 resources:
+- 00_config-ran/00_machine-config-pool-worker-rt.yaml
+- 00_config-ran/01_machine-config-worker-rt.yaml
 - 01_sriov-network-operator/01_namespace.yaml
 - 01_sriov-network-operator/02_sriovnetwork_v1_sriovnetwork_crd.yaml
 - 01_sriov-network-operator/03_sriovnetwork_v1_sriovnetworknodepolicy_crd.yaml
