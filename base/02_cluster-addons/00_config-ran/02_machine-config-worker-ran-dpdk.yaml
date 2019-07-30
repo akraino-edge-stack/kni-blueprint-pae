@@ -1,0 +1,34 @@
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker-ran
+  name: 99-worker-ran-dpdk-mc
+spec:
+  config:
+    ignition:
+      version: 2.2.0
+    storage:
+      files:
+        -
+          contents:
+            source: data:text/plain;base64,IyEvYmluL2Jhc2gKc3Vic2NyaXB0aW9uLW1hbmFnZXIgcmVwb3MgLS1lbmFibGUgcmhlbC04LWZvci14ODZfNjQtYXBwc3RyZWFtLXJwbXMKZG5mIC15IGluc3RhbGwgZHBkawp0b3VjaCAvb3B0L2RwZGtfZXhlY3V0ZWQ=
+          filesystem: root
+          mode: 0777
+          path: /opt/setup_dpdk.sh
+    systemd:
+      units:
+        -
+          contents: |
+            [Unit]
+            Description=One time service to install dpdk
+            After=network.target
+            ConditionPathExists=!/opt/dpdk_executed
+            [Service]
+            Type=oneshot
+            ExecStart=/opt/setup_dpdk.sh
+            [Install]
+            WantedBy=multi-user.target
+          enabled: true
+          name: install_dpdk.service
