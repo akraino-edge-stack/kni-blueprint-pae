@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e2e95bb_b6d8d20a",
+        "filename": "sites/testing.baremetal.edge-sites.net/requirements.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-08-02T10:17:13Z",
+      "side": 1,
+      "message": "why the requirements are pointing to AWS?",
+      "range": {
+        "startLine": 1,
+        "startChar": 26,
+        "endLine": 1,
+        "endChar": 29
+      },
+      "revId": "cc8d16d7cd7e5be8d5b7bf858b43053ba0ba4efb",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    }
+  ]
+}
