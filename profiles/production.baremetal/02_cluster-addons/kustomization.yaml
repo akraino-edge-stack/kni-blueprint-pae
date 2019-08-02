@@ -1,2 +1,13 @@
 bases:
 - ../../../base/02_cluster-addons
+resources:
+- 01_sriov-network-operator/01_namespace.yaml
+- 01_sriov-network-operator/02_sriovnetwork_v1_sriovnetwork_crd.yaml
+- 01_sriov-network-operator/03_sriovnetwork_v1_sriovnetworknodepolicy_crd.yaml
+- 01_sriov-network-operator/04_sriovnetwork_v1_sriovnetworknodestate_crd.yaml
+- 01_sriov-network-operator/05_service_account.yaml
+- 01_sriov-network-operator/06_role.yaml
+- 01_sriov-network-operator/07_role_binding.yaml
+- 01_sriov-network-operator/08_clusterrole.yaml
+- 01_sriov-network-operator/09_clusterrolebinding.yaml
+- 01_sriov-network-operator/10_operator.yaml
