@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7931576d_5302c9b5",
+        "filename": "base/02_cluster-addons/03_nfd/0110_namespace.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-08-02T10:48:28Z",
+      "side": 1,
+      "message": "Remove one blank line",
+      "revId": "cf260f5d65b667f09352a987081b0fe7b33d02c1",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2396c181_95e73acf",
+        "filename": "base/02_cluster-addons/03_nfd/0300_cluster_role.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-08-02T10:48:28Z",
+      "side": 1,
+      "message": "blank space",
+      "range": {
+        "startLine": 58,
+        "startChar": 17,
+        "endLine": 58,
+        "endChar": 18
+      },
+      "revId": "cf260f5d65b667f09352a987081b0fe7b33d02c1",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce7caf72_d90a353e",
+        "filename": "base/02_cluster-addons/03_nfd/0300_cluster_role.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-08-02T10:48:28Z",
+      "side": 1,
+      "message": "blank spaces",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 2
+      },
+      "revId": "cf260f5d65b667f09352a987081b0fe7b33d02c1",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d198554b_936d3554",
+        "filename": "base/02_cluster-addons/03_nfd/0600_operator.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-08-02T10:48:28Z",
+      "side": 1,
+      "message": "2 blank lines",
+      "revId": "cf260f5d65b667f09352a987081b0fe7b33d02c1",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa8fb6c2_c86b97ab",
+        "filename": "base/02_cluster-addons/03_nfd/0700_cr.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-08-02T10:48:28Z",
+      "side": 1,
+      "message": "blank space",
+      "range": {
+        "startLine": 4,
+        "startChar": 25,
+        "endLine": 4,
+        "endChar": 26
+      },
+      "revId": "cf260f5d65b667f09352a987081b0fe7b33d02c1",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    }
+  ]
+}
