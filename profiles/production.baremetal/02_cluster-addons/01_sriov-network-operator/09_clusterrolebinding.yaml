@@ -1,0 +1,27 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: sriov-network-operator
+  namespace: sriov-network-operator
+roleRef:
+  kind: ClusterRole
+  name: sriov-network-operator
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  namespace: sriov-network-operator
+  name: sriov-network-operator
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: sriov-network-config-daemon
+  namespace: sriov-network-operator
+roleRef:
+  kind: ClusterRole
+  name: sriov-network-config-daemon
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  namespace: sriov-network-operator
+  name: sriov-network-config-daemon
