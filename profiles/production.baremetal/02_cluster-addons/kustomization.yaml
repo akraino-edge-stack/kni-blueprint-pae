@@ -11,3 +11,8 @@ resources:
 - 01_sriov-network-operator/08_clusterrole.yaml
 - 01_sriov-network-operator/09_clusterrolebinding.yaml
 - 01_sriov-network-operator/10_operator.yaml
+- 02_ptp-daemonset/01_ptp-machineconfig.yaml
+- 02_ptp-daemonset/02_namespace.yaml
+- 02_ptp-daemonset/03_serviceaccount.yaml
+- 02_ptp-daemonset/04_rbac.yaml
+- 02_ptp-daemonset/05_daemonset.yaml

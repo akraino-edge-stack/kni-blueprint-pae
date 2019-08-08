@@ -1,0 +1,12 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: ocp4x-ptp
+subjects:
+- kind: ServiceAccount
+  name: ocp4x-ptp-sa
+  namespace: ocp4x-ptp
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
