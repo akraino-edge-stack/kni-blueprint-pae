@@ -1,0 +1,9 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  namespace: ocp4x-ptp
+  name: ptp-config
+data:
+  # Adapt the interface name to your hosts
+  PTP4L.OPTIONS: "-m -S -i eth0"
+  PHC2SYS.OPTIONS: "-m -a -r"

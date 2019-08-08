@@ -1,2 +1,4 @@
 bases:
 - ../../../profiles/production.baremetal/02_cluster-addons
+patches:
+- 01_ptp-daemonset/configmap.yaml
