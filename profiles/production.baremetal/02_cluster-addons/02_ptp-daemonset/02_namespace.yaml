@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ocp4x-ptp
+  labels:
+    name: ocp4x-ptp
+    openshift.io/run-level: "0"
+    openshift.io/cluster-monitoring: "true"
+  annotations:
+    openshift.io/node-selector: "" #override default node selector
+    openshift.io/description: "Precision Time Protocol (PTP)"

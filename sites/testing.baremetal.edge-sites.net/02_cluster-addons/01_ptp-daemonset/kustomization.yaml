@@ -1,0 +1,8 @@
+bases:
+- ../../../../profiles/production.baremetal/02_cluster-addons/
+patchesJson6902:
+- path: configmap.patch.yaml
+  target:
+    kind: ConfigMap
+    name: ptp-config
+    namespace: ocp4x-ptp
