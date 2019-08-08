@@ -1,0 +1,111 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ocp4x-ptp
+  namespace: ocp4x-ptp
+  labels:
+    name: ocp4x-ptp
+spec:
+  selector:
+    matchLabels:
+      name: ocp4x-ptp
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: ocp4x-ptp
+        component: ptp
+    spec:
+      serviceAccountName: ocp4x-ptp-sa
+      hostNetwork: true
+      nodeSelector:
+         node-role.kubernetes.io/worker-ran: ""
+
+      containers:
+      - name: ocp4x-ptp
+        image: quay.io/redhat/ptp
+        command:
+        - "/ptp-run"
+        - "ptp4l"
+        securityContext:
+          privileged: true
+        resources: {}
+        env:
+        - name: PTP_RUN
+          value: "ptp4l"
+        - name: PTP4L_OPTIONS
+          valueFrom:
+            configMapKeyRef:
+              name: ptp-config
+              key: PTP4L.OPTIONS
+        - name: PHC2SYS_OPTIONS
+          valueFrom:
+            configMapKeyRef:
+              name: ptp-config
+              key: PHC2SYS.OPTIONS
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+
+        terminationMessagePolicy: FallbackToLogsOnError
+        terminationMessagePath: /dev/termination-log
+
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          readOnly: true
+        - mountPath: /etc/chrony.conf
+          name: host-etc-chrony-conf
+          readOnly: true
+        - mountPath: /etc/ntp.conf
+          name: host-etc-ntp-conf
+          readOnly: true
+        - mountPath: /sbin/chronyd
+          name: host-sbin-chronyd
+          readOnly: true
+        - mountPath: /usr/sbin/ntpd
+          name: host-usr-sbin-ntpd
+          readOnly: true
+          # to run commands chroot in to the host
+        - mountPath: /host
+          name: host-slash
+          readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: ptp-config
+        - name: host-etc-chrony-conf
+          hostPath:
+            path: /etc/chrony.conf
+        - name: host-etc-ntp-conf
+          hostPath:
+            path: /etc/ntp.conf
+        - name: host-sbin-chronyd
+          hostPath:
+            path: /sbin/chronyd
+        - name: host-usr-sbin-ntpd
+          hostPath:
+            path: /usr/sbin/ntpd
+        - name: host-slash
+          hostPath:
+            path: /
+
+      terminationGracePeriodSeconds: 10
+
+      restartPolicy: Always
+      # tolerations:
+      # - key: "node-role.kubernetes.io/master"
+      #   operator: Exists
+      #   effect: NoSchedule
+      # - key: "node.kubernetes.io/not-ready"
+      #   operator: Exists
+      #   effect: NoSchedule
+      # - key: node.kubernetes.io/network-unavailable
+      #   operator: Exists
+      #   effect: NoSchedule

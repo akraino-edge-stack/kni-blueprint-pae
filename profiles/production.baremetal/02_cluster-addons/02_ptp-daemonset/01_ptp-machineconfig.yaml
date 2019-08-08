@@ -1,0 +1,31 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  creationTimestamp: null
+  labels:
+    machineconfiguration.openshift.io/role: worker-ran
+  name: 98-worker-rt-ptp
+spec:
+  config:
+    ignition:
+      config: {}
+      security:
+        tls: {}
+      timeouts: {}
+      version: 2.2.0
+    networkd: {}
+    passwd: {}
+    storage: {
+            "files": [
+                {
+                    "path": "/etc/modules-load.d/ptp.conf",
+                    "filesystem": "root",
+                    "mode": 420,
+                    "contents": {
+                    "source": "data:text/plain"
+                    }
+                }
+            ]
+        }
+    systemd: {}
+  osImageURL: ""
