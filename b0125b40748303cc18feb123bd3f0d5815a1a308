@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "960c9776_1a248de3",
+        "filename": "profiles/production.baremetal/02_cluster-addons/02_ptp-daemonset/01_ptp-machineconfig.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-08-14T11:48:02Z",
+      "side": 1,
+      "message": "please set it to data:text/plain",
+      "range": {
+        "startLine": 25,
+        "startChar": 31,
+        "endLine": 25,
+        "endChar": 35
+      },
+      "revId": "b0125b40748303cc18feb123bd3f0d5815a1a308",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "949c7eeb_e2ea6ffe",
         "filename": "profiles/production.baremetal/02_cluster-addons/02_ptp-daemonset/03_serviceaccount.yaml",
         "patchSetId": 1
@@ -13,6 +36,75 @@
       "writtenOn": "2019-08-14T11:26:41Z",
       "side": 1,
       "message": "it gives me error: error validating \"STDIN\": error validating data: ValidationError(ServiceAccount): unknown field \"type\" in io.k8s.api.core.v1.ServiceAccount; if you choose to ignore these errors, turn validation off with --validate\u003dfalse",
+      "revId": "b0125b40748303cc18feb123bd3f0d5815a1a308",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "725707b9_d38e8133",
+        "filename": "profiles/production.baremetal/02_cluster-addons/02_ptp-daemonset/05_daemonset.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-08-14T11:48:02Z",
+      "side": 1,
+      "message": "this needs to be in an independent files. Also, this needs to be configured per site, so there should be a sample in baremetal site on how to override the value.\nAnd next question, this is a generic value for all nodes with same worker-ran profile? or can it be different per node?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 4
+      },
+      "revId": "b0125b40748303cc18feb123bd3f0d5815a1a308",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1c797b5_2dc46eb3",
+        "filename": "profiles/production.baremetal/02_cluster-addons/02_ptp-daemonset/05_daemonset.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-08-14T11:48:02Z",
+      "side": 1,
+      "message": "no minimum resource needed?",
+      "range": {
+        "startLine": 44,
+        "startChar": 12,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "b0125b40748303cc18feb123bd3f0d5815a1a308",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce94a0c6_6db2acf2",
+        "filename": "profiles/production.baremetal/02_cluster-addons/02_ptp-daemonset/05_daemonset.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-08-14T11:48:02Z",
+      "side": 1,
+      "message": "extra spaces",
+      "range": {
+        "startLine": 87,
+        "startChar": 20,
+        "endLine": 87,
+        "endChar": 33
+      },
       "revId": "b0125b40748303cc18feb123bd3f0d5815a1a308",
       "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
       "unresolved": true
