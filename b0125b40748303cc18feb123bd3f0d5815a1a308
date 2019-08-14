@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "949c7eeb_e2ea6ffe",
+        "filename": "profiles/production.baremetal/02_cluster-addons/02_ptp-daemonset/03_serviceaccount.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-08-14T11:26:41Z",
+      "side": 1,
+      "message": "it gives me error: error validating \"STDIN\": error validating data: ValidationError(ServiceAccount): unknown field \"type\" in io.k8s.api.core.v1.ServiceAccount; if you choose to ignore these errors, turn validation off with --validate\u003dfalse",
+      "revId": "b0125b40748303cc18feb123bd3f0d5815a1a308",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    }
+  ]
+}
