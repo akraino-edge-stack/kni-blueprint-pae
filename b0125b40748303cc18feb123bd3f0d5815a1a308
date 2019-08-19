@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eade5885_ac5045bb",
+        "filename": "profiles/production.baremetal/02_cluster-addons/02_ptp-daemonset/01_ptp-machineconfig.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-08-19T10:45:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "960c9776_1a248de3",
+      "range": {
+        "startLine": 25,
+        "startChar": 31,
+        "endLine": 25,
+        "endChar": 35
+      },
+      "revId": "b0125b40748303cc18feb123bd3f0d5815a1a308",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "949c7eeb_e2ea6ffe",
         "filename": "profiles/production.baremetal/02_cluster-addons/02_ptp-daemonset/03_serviceaccount.yaml",
         "patchSetId": 1
