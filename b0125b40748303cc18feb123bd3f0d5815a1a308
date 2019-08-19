@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "c6e9526e_4e99d45d",
+        "filename": "profiles/production.baremetal/02_cluster-addons/02_ptp-daemonset/05_daemonset.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-08-19T10:44:47Z",
+      "side": 1,
+      "message": "- I\u0027m gonna add a patch file to overwrite the interface via kustomize.\n- We are assuming to have homogeneous HW, so all workers with the same profile (worker-ran) should look the same in terms of networking resources.",
+      "parentUuid": "725707b9_d38e8133",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 4
+      },
+      "revId": "b0125b40748303cc18feb123bd3f0d5815a1a308",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c1c797b5_2dc46eb3",
         "filename": "profiles/production.baremetal/02_cluster-addons/02_ptp-daemonset/05_daemonset.yaml",
         "patchSetId": 1
@@ -76,6 +100,30 @@
       "writtenOn": "2019-08-14T11:48:02Z",
       "side": 1,
       "message": "no minimum resource needed?",
+      "range": {
+        "startLine": 44,
+        "startChar": 12,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "b0125b40748303cc18feb123bd3f0d5815a1a308",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90f076ef_18dd12bd",
+        "filename": "profiles/production.baremetal/02_cluster-addons/02_ptp-daemonset/05_daemonset.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-08-19T10:44:47Z",
+      "side": 1,
+      "message": "It was just an example on how to set resource filter. Removing it.",
+      "parentUuid": "c1c797b5_2dc46eb3",
       "range": {
         "startLine": 44,
         "startChar": 12,
@@ -108,6 +156,30 @@
       "revId": "b0125b40748303cc18feb123bd3f0d5815a1a308",
       "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd6078cd_5713fb81",
+        "filename": "profiles/production.baremetal/02_cluster-addons/02_ptp-daemonset/05_daemonset.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-08-19T10:44:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ce94a0c6_6db2acf2",
+      "range": {
+        "startLine": 87,
+        "startChar": 20,
+        "endLine": 87,
+        "endChar": 33
+      },
+      "revId": "b0125b40748303cc18feb123bd3f0d5815a1a308",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": false
     }
   ]
 }
