@@ -1,2 +1,4 @@
 bases:
 - ../../../profiles/production.baremetal/02_cluster-addons
+patches:
+- 03_storage/00_storage.patch.yaml
