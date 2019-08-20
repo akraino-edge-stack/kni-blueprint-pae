@@ -1,0 +1,5 @@
+- op: add
+  path: /spec/storage
+  value:
+    pvc:
+      claim:
