@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bc28717_901a6e3e",
+        "filename": "sites/testing.baremetal.edge-sites.net/02_cluster-addons/01_ptp-daemonset/kustomization.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-08-20T11:19:00Z",
+      "side": 1,
+      "message": "you miss version: v1 here, otherwise it cannot find the configmap",
+      "range": {
+        "startLine": 6,
+        "startChar": 4,
+        "endLine": 6,
+        "endChar": 8
+      },
+      "revId": "f8422e75c195ae6984d84843f00c5a119459330e",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    }
+  ]
+}
