@@ -1,2 +1,10 @@
 bases:
 - ../../../profiles/production.baremetal/02_cluster-addons
+patchesJson6902:
+- path: downscale-ingress-replicas.patch.yaml
+  target:
+    group: operator.openshift.io
+    kind: IngressController
+    name: default
+    namespace: openshift-ingress-operator
+    version: v1
