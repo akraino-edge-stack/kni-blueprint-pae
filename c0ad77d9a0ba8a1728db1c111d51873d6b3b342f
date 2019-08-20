@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b21d1ec_35f94244",
+        "filename": "profiles/production.baremetal/02_cluster-addons/02_ptp-daemonset/03_serviceaccount.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-08-20T13:37:55Z",
+      "side": 1,
+      "message": "remove type",
+      "revId": "c0ad77d9a0ba8a1728db1c111d51873d6b3b342f",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce146d6c_d75dfea3",
+        "filename": "sites/testing.baremetal.edge-sites.net/02_cluster-addons/01_ptp-daemonset/kustomization.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2019-08-20T13:37:55Z",
+      "side": 1,
+      "message": "Do not create a kustomization file just for that. You can add the patch inside 02_cluster-addons/kustomization.yaml, and this needs to be patches: 01_ptp-daemonset/configmap.yaml",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 5
+      },
+      "revId": "c0ad77d9a0ba8a1728db1c111d51873d6b3b342f",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    }
+  ]
+}
