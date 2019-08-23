@@ -1,5 +1,5 @@
 ---
-# copied from https://github.com/kubevirt/kubevirt/releases/download/v0.18.1/kubevirt-operator.yaml
+# copied from https://github.com/kubevirt/kubevirt/releases/download/v0.20.2/kubevirt-operator.yaml
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -23,6 +23,8 @@ spec:
     type: string
   group: kubevirt.io
   names:
+    categories:
+    - all
     kind: KubeVirt
     plural: kubevirts
     shortNames:
@@ -31,6 +33,10 @@ spec:
     singular: kubevirt
   scope: Namespaced
   version: v1alpha3
+  versions:
+  - name: v1alpha3
+    served: true
+    storage: true
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -87,6 +93,7 @@ rules:
   - serviceaccounts
   - services
   - endpoints
+  - pods/exec
   verbs:
   - get
   - list
@@ -149,6 +156,7 @@ rules:
   resources:
   - securitycontextconstraints
   verbs:
+  - create
   - get
   - list
   - watch
@@ -163,6 +171,19 @@ rules:
   - patch
   - update
 - apiGroups:
+  - security.openshift.io
+  resourceNames:
+  - kubevirt-handler
+  - kubevirt-controller
+  resources:
+  - securitycontextconstraints
+  verbs:
+  - get
+  - list
+  - watch
+  - update
+  - delete
+- apiGroups:
   - admissionregistration.k8s.io
   resources:
   - validatingwebhookconfigurations
@@ -172,6 +193,14 @@ rules:
   - watch
   - create
   - delete
+- apiGroups:
+  - subresources.kubevirt.io
+  resources:
+  - virtualmachines/start
+  - virtualmachines/stop
+  - virtualmachines/restart
+  verbs:
+  - put
 - apiGroups:
   - admissionregistration.k8s.io
   resources:
@@ -196,12 +225,6 @@ rules:
   verbs:
   - get
   - list
-- apiGroups:
-  - ""
-  resources:
-  - pods/exec
-  verbs:
-  - create
 - apiGroups:
   - kubevirt.io
   resources:
@@ -236,6 +259,14 @@ rules:
   - watch
   - list
 - apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
   - ""
   resources:
   - secrets
@@ -263,6 +294,7 @@ rules:
   - watch
   - delete
   - create
+  - patch
 - apiGroups:
   - ""
   resources:
@@ -329,6 +361,20 @@ rules:
   - list
   - watch
 - apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - authorization.k8s.io
+  resources:
+  - subjectaccessreviews
+  verbs:
+  - create
+- apiGroups:
   - kubevirt.io
   resources:
   - virtualmachineinstances
@@ -356,6 +402,14 @@ rules:
   verbs:
   - create
   - patch
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - get
+  - list
+  - watch
 - apiGroups:
   - ""
   resources:
@@ -387,9 +441,10 @@ rules:
 - apiGroups:
   - subresources.kubevirt.io
   resources:
+  - virtualmachines/start
+  - virtualmachines/stop
   - virtualmachines/restart
   verbs:
-  - put
   - update
 - apiGroups:
   - kubevirt.io
@@ -398,6 +453,7 @@ rules:
   - virtualmachineinstances
   - virtualmachineinstancepresets
   - virtualmachineinstancereplicasets
+  - virtualmachineinstancemigrations
   verbs:
   - get
   - delete
@@ -417,9 +473,10 @@ rules:
 - apiGroups:
   - subresources.kubevirt.io
   resources:
+  - virtualmachines/start
+  - virtualmachines/stop
   - virtualmachines/restart
   verbs:
-  - put
   - update
 - apiGroups:
   - kubevirt.io
@@ -428,6 +485,7 @@ rules:
   - virtualmachineinstances
   - virtualmachineinstancepresets
   - virtualmachineinstancereplicasets
+  - virtualmachineinstancemigrations
   verbs:
   - get
   - delete
@@ -443,6 +501,7 @@ rules:
   - virtualmachineinstances
   - virtualmachineinstancepresets
   - virtualmachineinstancereplicasets
+  - virtualmachineinstancemigrations
   verbs:
   - get
   - list
@@ -509,12 +568,22 @@ spec:
         - "2"
         env:
         - name: OPERATOR_IMAGE
-          value: index.docker.io/kubevirt/virt-operator:v0.18.0
+          value: index.docker.io/kubevirt/virt-operator@sha256:95ca590d2a94dade21de41c03f94ca7140e84ecb5dc0743e521b0a1beda83c60
         - name: WATCH_NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.annotations['olm.targetNamespaces']
-        image: index.docker.io/kubevirt/virt-operator:v0.18.0
+        - name: KUBEVIRT_VERSION
+          value: v0.20.2
+        - name: VIRT_API_SHASUM
+          value: sha256:c383ad1da14b5d66c8e6726f3c2c63d8c28f1b0b123fb3b9447a5e45ece1ef47
+        - name: VIRT_CONTROLLER_SHASUM
+          value: sha256:c76389ded32001632be2a807fd517c25a7266deeeaa85817681ed82539c7f23f
+        - name: VIRT_HANDLER_SHASUM
+          value: sha256:f385db3313205713d991d481f9c66308b922e54a3c21f091131d6f275abae447
+        - name: VIRT_LAUNCHER_SHASUM
+          value: sha256:379bf8042bc5bc18a09d70ce535ebf81dd216f5c960a84bce2ba8ed4234dc6d5
+        image: index.docker.io/kubevirt/virt-operator@sha256:95ca590d2a94dade21de41c03f94ca7140e84ecb5dc0743e521b0a1beda83c60
         imagePullPolicy: IfNotPresent
         name: virt-operator
         ports:
