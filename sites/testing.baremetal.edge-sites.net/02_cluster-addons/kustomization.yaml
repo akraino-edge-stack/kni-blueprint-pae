@@ -2,3 +2,4 @@ bases:
 - ../../../profiles/production.baremetal/02_cluster-addons
 patches:
 - 02_ptp-daemonset/configmap.yaml
+- 04_argocd/argocd-route.patch.yaml

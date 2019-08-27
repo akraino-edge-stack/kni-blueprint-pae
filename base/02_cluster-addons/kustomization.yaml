@@ -11,3 +11,6 @@ resources:
 - 03_nfd/0500_crd.yaml
 - 03_nfd/0600_operator.yaml
 - 03_nfd/0700_cr.yaml
+- 04_argocd/00_argocd-install.yaml
+- 04_argocd/01_argocd-route.yaml
+- 04_argocd/02_argocd-app.yaml
