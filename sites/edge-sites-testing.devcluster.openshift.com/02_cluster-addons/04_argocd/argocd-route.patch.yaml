@@ -1,0 +1,7 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: argocd-server-https
+  namespace: argocd
+spec:
+  host: argocd-server.apps.edge-sites-testing.devcluster.openshift.com

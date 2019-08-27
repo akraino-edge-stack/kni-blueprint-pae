@@ -1,2 +1,4 @@
 bases:
 - ../../../profiles/testing.libvirt/02_cluster-addons
+patches:
+- 04_argocd/argocd-route.patch.yaml

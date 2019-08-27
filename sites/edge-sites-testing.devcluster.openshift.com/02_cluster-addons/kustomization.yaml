@@ -1,2 +1,4 @@
 bases:
 - ../../../profiles/production.aws/02_cluster-addons
+patches:
+- 04_argocd/argocd-route.patch.yaml
