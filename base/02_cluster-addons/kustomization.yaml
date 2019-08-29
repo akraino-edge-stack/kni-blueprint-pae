@@ -11,3 +11,5 @@ resources:
 - 03_nfd/0500_crd.yaml
 - 03_nfd/0600_operator.yaml
 - 03_nfd/0700_cr.yaml
+- 04_knictl/00_knictl-service-account.yaml
+- 04_knictl/01_knictl-pod.yaml

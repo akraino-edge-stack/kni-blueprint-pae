@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: knictl
+  namespace: default
+spec:
+  serviceAccountName: knictl
+  containers:
+  - name: knictl
+    image: registry.redhat.io/rhel8/go-toolset
+    command:
+      - /bin/bash
+      - -c
+      - --
+    args: [ "while true; do sleep 30; done;" ]
+    imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+  securityContext:
+    privileged: true
