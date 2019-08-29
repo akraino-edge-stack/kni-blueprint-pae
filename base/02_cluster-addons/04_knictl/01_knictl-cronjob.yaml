@@ -1,0 +1,22 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: knictl-cron
+spec:
+  schedule: "*/15 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: knictl
+          containers:
+           - name: knictl
+             image: quay.io/yrobla/knictl
+             command:
+             - /bin/bash
+             - -c
+             - --
+             args: [ "knictl fetch_requirements github.com/yrobla/test.kni.home --requirements=kubectl,kustomize; knictl apply_workloads test.kni.home --kubeconfig=local;" ]
+          imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
