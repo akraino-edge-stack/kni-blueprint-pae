@@ -17,3 +17,7 @@ resources:
 - 02_ptp-daemonset/04_rbac.yaml
 - 02_ptp-daemonset/05_configmap.yaml
 - 02_ptp-daemonset/06_daemonset.yaml
+- 03_storage/00_ceph_common.yaml
+- 03_storage/01_ceph_operator_openshift.yaml
+- 03_storage/02_ceph_storage_class.yaml
+
