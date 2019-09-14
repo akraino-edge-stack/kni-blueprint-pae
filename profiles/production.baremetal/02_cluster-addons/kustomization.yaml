@@ -21,4 +21,5 @@ resources:
 - 03_storage/01_ceph_operator_openshift.yaml
 - 03_storage/02_ceph_cluster.yaml
 - 03_storage/03_ceph_storage_class.yaml
+- 03_storage/03_ceph_storage_filesystem.yaml
 
