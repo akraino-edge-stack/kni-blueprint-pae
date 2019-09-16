@@ -1,2 +1,5 @@
 bases:
 - ../00_cluster
+resources:
+- openshift/00_autoapprover.yaml
+
