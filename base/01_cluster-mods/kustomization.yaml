@@ -4,4 +4,4 @@ resources:
 - openshift/00_autoapprover_sa.yaml
 - openshift/01_autoapprover_crb.yaml
 - openshift/02_autoapprover_statefulset.yaml
-
+- manifests/00_ingress_controller.yaml
