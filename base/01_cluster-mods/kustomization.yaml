@@ -1,2 +1,4 @@
 bases:
 - ../00_cluster
+resources:
+- manifests/00_ingress_controller.yaml
