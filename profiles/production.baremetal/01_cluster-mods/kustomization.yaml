@@ -2,3 +2,5 @@ bases:
 - ../../../base/01_cluster-mods
 resources:
 - manifests/00_imageregistry-config.yaml
+patches:
+- manifests/00_downscale_ingress_replicas.patch.yaml
