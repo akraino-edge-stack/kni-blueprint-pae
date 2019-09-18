@@ -1,2 +1,4 @@
 bases:
 - ../../../base/01_cluster-mods
+patches:
+- manifests/00_upscale_ingress_replicas.yaml
