@@ -1,12 +1,5 @@
 bases:
 - ../../../base/02_cluster-addons
-patchesJson6902:
-- path: image-registry-storage.yaml
-  target:
-    group: imageregistry.operator.openshift.io
-    kind: Config
-    name: cluster
-    version: v1
 resources:
 - 01_sriov-network-operator/01_namespace.yaml
 - 01_sriov-network-operator/02_sriovnetwork_v1_sriovnetwork_crd.yaml
@@ -29,3 +22,4 @@ resources:
 - 03_storage/02_ceph_cluster.yaml
 - 03_storage/03_ceph_storage_class.yaml
 - 03_storage/03_ceph_storage_filesystem.yaml
+
