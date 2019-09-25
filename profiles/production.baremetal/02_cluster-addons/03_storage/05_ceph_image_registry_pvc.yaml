@@ -1,0 +1,13 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: image-registry-storage
+  namespace: openshift-image-registry
+spec:
+  storageClassName: rook-filesystem
+  resources:
+    requests:
+      storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
