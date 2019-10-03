@@ -1,0 +1,19 @@
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker-rt
+  name: machine-config-worker-rt-env-vars
+spec:
+  config:
+    ignition:
+      version: 2.2.0
+    storage:
+      files:
+        -
+          contents:
+            source: data:text/plain;base64,UlRfVFVORURfSVNPTEFURURfQ09SRVM9MSwyClJUX1RVTkVEX0hVR0VQQUdFX1NJWkVfREVGQVVMVD0xRwpSVF9UVU5FRF9IVUdFUEFHRV9TSVpFPTFHClJUX1RVTkVEX0hVR0VQQUdFX05VTT0xMA==
+          filesystem: root
+          mode: 0777
+          path: /etc/tuned/realtime-variables.conf
