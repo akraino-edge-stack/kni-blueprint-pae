@@ -5,3 +5,4 @@ metadata:
   labels:
     node-role.kubernetes.io/worker-rt: ""
     node-role.kubernetes.io/worker-ran: ""
+    cpumanager: "true"
