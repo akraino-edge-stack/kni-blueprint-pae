@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc517b32_3dc963df",
+        "filename": "profiles/production.baremetal/02_cluster-addons/00_config-ran/04_add_tuned_affinity.yaml",
+        "patchSetId": 15
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-10-15T08:02:26Z",
+      "side": 1,
+      "message": "Blank space",
+      "range": {
+        "startLine": 16,
+        "startChar": 23,
+        "endLine": 16,
+        "endChar": 24
+      },
+      "revId": "aacabd1e3c1ca60aaf31f6a00b7e23f37c329e6d",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    }
+  ]
+}
