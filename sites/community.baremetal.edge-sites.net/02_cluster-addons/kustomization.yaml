@@ -1,0 +1,10 @@
+bases:
+- ../../../profiles/production.baremetal/02_cluster-addons
+patches:
+- 02_ptp-daemonset/configmap.yaml
+patchesJson6902:
+- path: 04_nodes/00_node_definitions.yaml
+  target:
+    version: v1
+    kind: Node
+    name: cluster-worker-0
