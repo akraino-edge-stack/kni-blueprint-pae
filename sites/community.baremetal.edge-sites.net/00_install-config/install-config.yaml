@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: InstallConfig
+baseDomain: baremetal.edge-sites.net
+compute:
+ - name: worker
+   replicas: 2
+controlPlane:
+   name: master
+   platform: {}
+   replicas: 1
+metadata:
+   name: cluster
+networking:
+  clusterNetworks:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+   none: {}
+   apiVIP: 192.168.111.4
+   ingressVIP: 192.168.111.3
+   dnsVIP: 192.168.111.2
+   hosts:
+      # Master nodes are always RHCOS
+      -  name: master-0
+         role: master
+         bmc:
+            address: ipmi://10.11.7.12
+            credentialsName: community-lab-ipmi
+         bootMACAddress: 3C:FD:FE:CD:98:C9  # provisioning network mac
+         sdnMacAddress: 3C:FD:FE:CD:98:C8   # baremetal network mac
+         # sdnIPAddress: 192.168.111.11     # Optional -- Set static IP
+         hardwareProfile: default
+         osProfile: 
+            # With role == master, the osType is always rhcos
+            # And with type rhcos, the following are settings are available
+            type: rhcos
+            pxe: bios         # pxe boot type either bios (default if not specified) or uefi
+            install_dev: sda  # where to install the operating system (sda is the default)
+      # Worker nodes can be either rhcos (default) || centos (7.x) || rhel (8.x)
+      -  name: worker-0
+         role: worker
+         bmc: 
+            address: ipmi://10.11.7.13
+            credentialsName: community-lab-ipmi
+         bootMACAddress: 3C:FD:FE:CD:9E:91
+         sdnMacAddress: 3C:FD:FE:CD:9E:90
+         hardwareProfile: default
+         provisioning_interface: enp134s0f1
+         baremetal_interface: enp134s0f0
+         # If an osProfile/type is not defined, rhe node defaults to RHCOS
+         osProfile: 
+            type: centos7
+            # With type: rhcos the following are settings are available
+            pxe: bios    # pxe boot type either bios (default if not specified) or uefi
+            install_dev: sda  # where to install the operating system (sda is the default)
+      -  name: worker-1
+         role: worker
+         bmc: 
+            address: ipmi://10.11.7.14
+            credentialsName: community-lab-ipmi
+         bootMACAddress: 3C:FD:FE:CD:9B:81
+         sdnMacAddress: 3C:FD:FE:CD:9B:80
+         hardwareProfile: default
+         # If an osProfile/type is not defined, rhe node defaults to RHCOS
+         # osProfile: 
+            # type: rhcos
+            # With type: rhcos the following are settings are available
+            # pxe: bios|uefi    # pxe boot type either bios (default if not specified) or uefi
+            # install_dev: sda  # where to install the operating system (sda is the default)
+pullSecret: 'PULL_SECRET'
+sshKey: |
+   SSH_PUB_KEY
+
