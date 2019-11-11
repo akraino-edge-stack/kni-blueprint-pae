@@ -3,7 +3,6 @@ kind: SiteConfig
 metadata:
   name: notImportantHere
 config:
-  OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE: "registry.svc.ci.openshift.org/origin/release:4.1"
   TF_VAR_libvirt_master_memory: "12288"
   TF_VAR_libvirt_master_vcpu: "4"
 
