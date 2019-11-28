@@ -46,7 +46,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: sriov-network-config-daemon
-  namespace: sriov-network-operator
 rules:
 - apiGroups:
   - ""

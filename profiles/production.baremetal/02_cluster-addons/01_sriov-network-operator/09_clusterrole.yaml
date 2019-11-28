@@ -23,7 +23,7 @@ rules:
   resources: [clusterroles, clusterrolebindings]
   verbs: ["*"]
 - apiGroups: ["admissionregistration.k8s.io"]
-  resources: ["mutatingwebhookconfigurations"]
+  resources: ["mutatingwebhookconfigurations", "validatingwebhookconfigurations"]
   verbs: ["*"]
 - apiGroups: ["sriovnetwork.openshift.io"]
   resources: ["*"]
@@ -33,7 +33,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: sriov-network-config-daemon
-  namespace: sriov-network-operator
 rules:
 - apiGroups: [""]
   resources: ["nodes"]

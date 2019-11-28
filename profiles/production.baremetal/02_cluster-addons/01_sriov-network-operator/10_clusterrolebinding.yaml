@@ -6,7 +6,6 @@ metadata:
 roleRef:
   kind: ClusterRole
   name: sriov-network-operator
-  apiGroup: rbac.authorization.k8s.io
 subjects:
 - kind: ServiceAccount
   namespace: sriov-network-operator
@@ -20,8 +19,8 @@ metadata:
 roleRef:
   kind: ClusterRole
   name: sriov-network-config-daemon
-  apiGroup: rbac.authorization.k8s.io
 subjects:
 - kind: ServiceAccount
   namespace: sriov-network-operator
   name: sriov-network-config-daemon
+

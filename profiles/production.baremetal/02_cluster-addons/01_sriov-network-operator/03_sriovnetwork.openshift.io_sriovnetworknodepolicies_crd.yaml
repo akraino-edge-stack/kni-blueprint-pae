@@ -12,8 +12,11 @@ spec:
   scope: Namespaced
   subresources:
     status: {}
+  preserveUnknownFields: false
   validation:
     openAPIV3Schema:
+      description: SriovNetworkNodePolicy is the Schema for the sriovnetworknodepolicies
+        API
       properties:
         apiVersion:
           description: 'APIVersion defines the versioned schema of this representation
@@ -28,32 +31,49 @@ spec:
         metadata:
           type: object
         spec:
+          description: SriovNetworkNodePolicySpec defines the desired state of SriovNetworkNodePolicy
           properties:
             deviceType:
+              description: The driver type for configured VFs. Allowed value "netdevice",
+                "vfio-pci". Defaults to netdevice.
               enum:
               - netdevice
               - vfio-pci
               type: string
             isRdma:
+              description: RDMA mode. Defaults to false.
               type: boolean
             mtu:
-              format: int64
+              description: MTU of VF
               maximum: 9000
               minimum: 1
               type: integer
             nicSelector:
+              description: NicSelector selects the NICs to be configured
               properties:
                 deviceID:
+                  description: The device hex code of SR-IoV device. Allowed value
+                    "1583", "158b", "10fb", "1015", "1017".
+                  enum:
+                  - "1583"
+                  - 158b
+                  - 10fb
+                  - "1015"
+                  - "1017"
                   type: string
                 pfNames:
+                  description: Name of SR-IoV PF.
                   items:
                     type: string
                   type: array
                 rootDevices:
+                  description: PCI address of SR-IoV PF.
                   items:
                     type: string
                   type: array
                 vendor:
+                  description: The vendor hex code of SR-IoV device. Allowed value
+                    "8086", "15b3".
                   enum:
                   - "8086"
                   - 15b3
@@ -62,26 +82,32 @@ spec:
             nodeSelector:
               additionalProperties:
                 type: string
+              description: NodeSelector selects the nodes to be configured
               type: object
             numVfs:
-              format: int64
+              description: Number of VFs for each PF
               minimum: 0
               type: integer
             priority:
-              format: int64
+              description: Priority of the policy, higher priority policies can override
+                lower ones.
               maximum: 99
               minimum: 0
               type: integer
             resourceName:
+              description: SRIOV Network device plugin endpoint resource name
               type: string
           required:
-          - resourceName
+          - nicSelector
           - nodeSelector
           - numVfs
-          - nicSelector
+          - resourceName
           type: object
         status:
+          description: SriovNetworkNodePolicyStatus defines the observed state of
+            SriovNetworkNodePolicy
           type: object
+      type: object
   version: v1
   versions:
   - name: v1
