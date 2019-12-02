@@ -7,8 +7,8 @@ resources:
 - 00_config-ran/02_override_tuning_deployment.yaml
 - 00_config-ran/03_disable_tuning_deployment.yaml
 - 00_config-ran/04_add_tuned_affinity.yaml
-- 00_config-ran/05_add_static_kubeletconfig.yaml
-- 00_config-ran/06_add_static_policy_label.yaml
+- 00_config-ran/05_add_static_policy_label.yaml
+- 00_config-ran/06_add_static_kubeletconfig.yaml
 - 01_sriov-network-operator/01_namespace.yaml
 - 01_sriov-network-operator/02_sriov-operatorgroup.yaml
 - 01_sriov-network-operator/03_sriov-sub.yaml
