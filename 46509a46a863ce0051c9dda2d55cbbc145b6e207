@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b78a87a_ff12cd83",
+        "filename": "sites/testing.baremetal.edge-sites.net/00_install-config/credentials.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 154
+      },
+      "writtenOn": "2019-12-02T11:01:42Z",
+      "side": 1,
+      "message": "Any security concern with this?",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "46509a46a863ce0051c9dda2d55cbbc145b6e207",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    }
+  ]
+}
