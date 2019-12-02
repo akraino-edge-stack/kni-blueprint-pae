@@ -1,0 +1,6 @@
+- op: add
+  path: "/metadata/labels/node-role.kubernetes.io~1worker-rt"
+  value: ""
+- op: add
+  path: "/metadata/labels/node-role.kubernetes.io~1worker-ran"
+  value: ""

@@ -5,5 +5,5 @@ metadata:
   name: ptp-config
 data:
   # Adapt the interface name to your hosts
-  PTP4L.OPTIONS: "-m -S -i eno1"
+  PTP4L.OPTIONS: "-m -S -i eno2"
   PHC2SYS.OPTIONS: "-m -a -r"
