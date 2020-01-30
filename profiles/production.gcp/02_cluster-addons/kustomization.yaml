@@ -1,0 +1,5 @@
+bases:
+- ../../../base/02_cluster-addons
+resources:
+- 00_kubevirt/00_kubevirt-cm-emulation.yaml
+
