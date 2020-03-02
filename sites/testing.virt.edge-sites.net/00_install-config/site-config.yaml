@@ -5,5 +5,4 @@ metadata:
 config:
   TF_VAR_libvirt_master_memory: "12288"
   TF_VAR_libvirt_master_vcpu: "4"
-  OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE: "registry.svc.ci.openshift.org/ocp/release:4.4"
-
+  OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE: "quay.io/openshift-release-dev/ocp-release-nightly@sha256:206fd17bcc13e67804a1862b7cc656186e64a9c9ab941881e1d26832510c3e5e"
