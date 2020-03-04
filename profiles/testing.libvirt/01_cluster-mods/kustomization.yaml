@@ -1,4 +1,21 @@
 bases:
 - ../../../base/01_cluster-mods
 patches:
-- manifests/00_downscale_ingress_replicas.patch.yaml
+- target:
+    group: operator.openshift.io
+    version: v1
+    kind: IngressController
+    name: default
+  path:  manifests/00_downscale_ingress_replicas.patch.yaml
+- target:
+    group: machine.openshift.io
+    version: v1beta1
+    kind: Machine
+    name: .*
+  path: openshift/01_memory_cpu_settings_master.patch.yaml
+- target:
+    group: machine.openshift.io
+    version: v1beta1
+    kind: MachineSet
+    name: .*
+  path: openshift/02_memory_cpu_settings_worker.patch.yaml
