@@ -1,0 +1,13 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  name: .*
+  namespace: openshift-machine-api
+spec:
+  template:
+    spec:
+      providerSpec:
+        value:
+          apiVersion: libvirtproviderconfig.openshift.io/v1beta1
+          domainMemory: 8192
+          domainVcpu: 4
