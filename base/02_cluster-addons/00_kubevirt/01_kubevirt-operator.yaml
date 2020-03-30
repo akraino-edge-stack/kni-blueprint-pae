@@ -1,5 +1,5 @@
+# copied from https://github.com/kubevirt/kubevirt/releases/download/v0.27.0/kubevirt-operator.yaml
 ---
-# copied from https://github.com/kubevirt/kubevirt/releases/download/v0.20.2/kubevirt-operator.yaml
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -37,7 +37,6 @@ spec:
   - name: v1alpha3
     served: true
     storage: true
-
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -187,12 +186,40 @@ rules:
   - admissionregistration.k8s.io
   resources:
   - validatingwebhookconfigurations
+  - mutatingwebhookconfigurations
   verbs:
   - get
   - list
   - watch
   - create
   - delete
+  - update
+  - patch
+- apiGroups:
+  - apiregistration.k8s.io
+  resources:
+  - apiservices
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+  - patch
+- apiGroups:
+  - monitoring.coreos.com
+  resources:
+  - servicemonitors
+  - prometheusrules
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+  - patch
 - apiGroups:
   - subresources.kubevirt.io
   resources:
@@ -201,6 +228,15 @@ rules:
   - virtualmachines/restart
   verbs:
   - put
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
 - apiGroups:
   - admissionregistration.k8s.io
   resources:
@@ -225,13 +261,24 @@ rules:
   verbs:
   - get
   - list
+  - delete
+  - patch
 - apiGroups:
   - kubevirt.io
   resources:
   - virtualmachines
   - virtualmachineinstances
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
+- apiGroups:
+  - kubevirt.io
+  resources:
   - virtualmachineinstancemigrations
   verbs:
+  - create
   - get
   - list
   - watch
@@ -385,7 +432,6 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - secrets
   - persistentvolumeclaims
   verbs:
   - get
@@ -424,6 +470,7 @@ rules:
   - secrets
   verbs:
   - create
+  - get
 - apiGroups:
   - subresources.kubevirt.io
   resources:
@@ -436,6 +483,8 @@ rules:
   resources:
   - virtualmachineinstances/console
   - virtualmachineinstances/vnc
+  - virtualmachineinstances/pause
+  - virtualmachineinstances/unpause
   verbs:
   - get
 - apiGroups:
@@ -468,6 +517,8 @@ rules:
   resources:
   - virtualmachineinstances/console
   - virtualmachineinstances/vnc
+  - virtualmachineinstances/pause
+  - virtualmachineinstances/unpause
   verbs:
   - get
 - apiGroups:
@@ -533,7 +584,6 @@ subjects:
 - kind: ServiceAccount
   name: kubevirt-operator
   namespace: kubevirt
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -559,6 +609,18 @@ spec:
         prometheus.kubevirt.io: ""
       name: virt-operator
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: kubevirt.io
+                  operator: In
+                  values:
+                  - virt-operator
+              topologyKey: kubernetes.io/hostname
+            weight: 1
       containers:
       - command:
         - virt-operator
@@ -568,27 +630,30 @@ spec:
         - "2"
         env:
         - name: OPERATOR_IMAGE
-          value: index.docker.io/kubevirt/virt-operator@sha256:95ca590d2a94dade21de41c03f94ca7140e84ecb5dc0743e521b0a1beda83c60
+          value: index.docker.io/kubevirt/virt-operator@sha256:9c5e2ecfe49fab18d902d22f97969de942d501abec340651a218846bc68864d8
         - name: WATCH_NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.annotations['olm.targetNamespaces']
         - name: KUBEVIRT_VERSION
-          value: v0.20.2
+          value: v0.27.0
         - name: VIRT_API_SHASUM
-          value: sha256:c383ad1da14b5d66c8e6726f3c2c63d8c28f1b0b123fb3b9447a5e45ece1ef47
+          value: sha256:6c893bb539891eb00187bc074ae97864f18d085ee51ada2753d4230477079ffd
         - name: VIRT_CONTROLLER_SHASUM
-          value: sha256:c76389ded32001632be2a807fd517c25a7266deeeaa85817681ed82539c7f23f
+          value: sha256:03c9b3e9ee4616e993e786a5f335f744c5393b2a945609f9e1355cc22362fb98
         - name: VIRT_HANDLER_SHASUM
-          value: sha256:f385db3313205713d991d481f9c66308b922e54a3c21f091131d6f275abae447
+          value: sha256:0310b90a71a1b490841a44f8fe418392dc2f488720c3174087feb881325ff46a
         - name: VIRT_LAUNCHER_SHASUM
-          value: sha256:379bf8042bc5bc18a09d70ce535ebf81dd216f5c960a84bce2ba8ed4234dc6d5
-        image: index.docker.io/kubevirt/virt-operator@sha256:95ca590d2a94dade21de41c03f94ca7140e84ecb5dc0743e521b0a1beda83c60
+          value: sha256:e900d77e06c20d295a9dbfa356f340778ebc5a9924835b6dc2e83832b8feea64
+        image: index.docker.io/kubevirt/virt-operator@sha256:9c5e2ecfe49fab18d902d22f97969de942d501abec340651a218846bc68864d8
         imagePullPolicy: IfNotPresent
         name: virt-operator
         ports:
         - containerPort: 8443
           name: metrics
+          protocol: TCP
+        - containerPort: 8444
+          name: webhooks
           protocol: TCP
         readinessProbe:
           httpGet:
