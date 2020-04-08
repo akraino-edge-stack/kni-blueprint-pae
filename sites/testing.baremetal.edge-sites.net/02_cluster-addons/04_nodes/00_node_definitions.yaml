@@ -1,4 +1,4 @@
 - op: replace
   path: "/metadata/name"
-  value: "test-worker-0"
+  value: "testing-worker-0"
 

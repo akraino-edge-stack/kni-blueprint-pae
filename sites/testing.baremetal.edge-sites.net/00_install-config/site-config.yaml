@@ -2,7 +2,8 @@ apiVersion: kni.akraino.org/v1alpha1
 kind: SiteConfig
 metadata:
   name: notImportantHere
-config: {}
+config:
+  virtualizedInstall: "true"
 provisioningInfrastructure:
   hosts:
     # interface to use for provisioning on the masters
@@ -43,23 +44,22 @@ provisioningInfrastructure:
       # and DNS functionality will be provided by the provisioning host
       cluster: 192.168.111.3
       # Up to 3 external DNS servers to which non-local queries will be directed
-      external1: 8.8.8.8
-#     external2: 10.11.5.19
-#     external3: 10.11.5.19
+      external1: 10.10.160.1
+      external2: 10.10.160.2
 
   provHost:
     interfaces:
       # Interface on the provisioning host that connects to the provisioning network
-      provisioning: eno1
+      provisioning: dummy0
       # Must be in provisioningIpCidr range
       # pxe boot server will be at port 8080 on this address
       provisioningIpAddress: 172.22.0.1
       # Interface on the provisioning host that connects to the baremetal network
-      baremetal: eno2.1
+      baremetal: eno1
       # Must be in baremetalIpCidr range
       baremetalIpAddress: 192.168.111.199
       # Interface on the provisioning host that connects to the internet/external network
-      external: eno2.99
+      external: eno3
     bridges:
       # These bridges are created on the bastion host
       provisioning: provisioning
@@ -71,3 +71,4 @@ provisioningInfrastructure:
       clusterDNS: true
       # Does the provisioning host provide a default gateway for the baremetal network?
       baremetalGateway: true
+
