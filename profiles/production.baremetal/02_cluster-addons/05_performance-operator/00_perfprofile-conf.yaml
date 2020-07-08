@@ -1,0 +1,26 @@
+apiVersion: performance.openshift.io/v1alpha1
+kind: PerformanceProfile
+metadata:
+  name: ran-performanceprofile
+  namespace: openshift-performance-addon
+spec:
+  additionalKernelArgs:
+  - "processor.max_cstate=1"
+  - "intel_idle.max_cstate=0"
+  - "intel_pstate=disable"
+  - "tsc=nowatchdog"
+  cpu:
+    isolated: "2-9"
+    reserved: "0-1"
+  hugepages:
+    defaultHugepagesSize: "1G"
+    pages:
+    - size: "1G"
+      count: 16
+      node: 0
+  realTimeKernel:
+    enabled: true
+  nodeSelector:
+    node-role.kubernetes.io/worker: ""
+
+
