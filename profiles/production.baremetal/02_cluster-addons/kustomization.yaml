@@ -25,4 +25,8 @@ resources:
 - 03_storage/04_ceph_storage_filesystem.yaml
 - 03_storage/05_ceph_image_registry_pvc.yaml
 - 04_nodes/00_node_definitions.yaml
+- 05_performance-operator/01_namespace.yaml
+- 05_performance-operator/02_perf-operatorgroup.yaml
+- 05_performance-operator/03_perf-sub.yaml
+- 05_performance-operator/00_perfprofile-conf.yaml
 
