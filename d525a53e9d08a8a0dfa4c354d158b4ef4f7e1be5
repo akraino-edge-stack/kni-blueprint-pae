@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f77daf02_538f380a",
+        "filename": "profiles/production.baremetal/02_cluster-addons/05_performance-operator/00_perfprofile-conf.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2020-07-09T07:40:07Z",
+      "side": 1,
+      "message": "nit, remove extra newlines",
+      "revId": "d525a53e9d08a8a0dfa4c354d158b4ef4f7e1be5",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    }
+  ]
+}
