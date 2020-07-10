@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     machineconfiguration.openshift.io/role: worker-ran
-  name: 98-worker-rt-ptp
+  name: 98-worker-ptp
 spec:
   config:
     ignition:
