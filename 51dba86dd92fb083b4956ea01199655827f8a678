@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e01b90b6_56fb1819",
+        "filename": "profiles/production.baremetal/02_cluster-addons/01_sriov-network-operator/sriov_network.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2020-07-23T15:19:11Z",
+      "side": 1,
+      "message": "nit, extra whitespace",
+      "range": {
+        "startLine": 5,
+        "startChar": 27,
+        "endLine": 5,
+        "endChar": 36
+      },
+      "revId": "51dba86dd92fb083b4956ea01199655827f8a678",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07c0e9ee_ae99506f",
+        "filename": "sites/testing.baremetal.edge-sites.net/02_cluster-addons/05_sriov/sriov_network_policy.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2020-07-23T15:19:11Z",
+      "side": 1,
+      "message": "nit, extra whitespaces",
+      "range": {
+        "startLine": 5,
+        "startChar": 27,
+        "endLine": 5,
+        "endChar": 36
+      },
+      "revId": "51dba86dd92fb083b4956ea01199655827f8a678",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    }
+  ]
+}
