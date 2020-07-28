@@ -5,6 +5,7 @@ patches:
 - 02_cni-ipvlan/00_ipvlan-conf.yaml
 - 02_ptp-daemonset/configmap.yaml
 - 05_sriov/sriov_network_policy.yaml
+- 06_performance-profile/perf_profile.yaml
 patchesJson6902:
 - path: 04_nodes/00_node_definitions.yaml
   target:
