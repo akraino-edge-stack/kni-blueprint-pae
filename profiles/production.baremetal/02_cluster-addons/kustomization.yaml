@@ -21,4 +21,3 @@ resources:
 - 05_performance-operator/01_namespace.yaml
 - 05_performance-operator/02_perf-operatorgroup.yaml
 - 05_performance-operator/03_perf-sub.yaml
-- 05_performance-operator/04_perfprofile-conf.yaml
