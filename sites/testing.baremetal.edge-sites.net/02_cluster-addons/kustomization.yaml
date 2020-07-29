@@ -6,3 +6,10 @@ patches:
 - 02_ptp-daemonset/configmap.yaml
 resources:
 - 04_nodes/00_node_definitions.yaml
+# - 05_sriov/sriov_network_policy.yaml
+patchesJson6902:
+- path: 04_nodes/00_node_definitions.yaml
+  target:
+    version: v1
+    kind: Node
+    name: cluster-worker-0
