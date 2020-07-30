@@ -4,9 +4,5 @@ patches:
 - 01_cni-macvlan/00_macvlan-conf.yaml
 - 02_cni-ipvlan/00_ipvlan-conf.yaml
 - 02_ptp-daemonset/configmap.yaml
-patchesJson6902:
-- path: 04_nodes/00_node_definitions.yaml
-  target:
-    version: v1
-    kind: Node
-    name: cluster-worker-0
+resources:
+- 04_nodes/00_node_definitions.yaml
