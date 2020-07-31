@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe99fdf3_d3aea922",
+        "filename": "profiles/production.baremetal/02_cluster-addons/01_sriov-network-operator/sriov_network.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2020-07-31T15:06:08Z",
+      "side": 1,
+      "message": "this needs to be the content of this file: https://github.com/redhat-nfvpe/flexran-manifests/blob/master/cluster_configuration/base/sriov/sriov_network.yaml",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 10
+      },
+      "revId": "5225fa1d1d292cd7a965196c959fab0a30c34a17",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53f0f874_078ea5b9",
+        "filename": "sites/testing.baremetal.edge-sites.net/02_cluster-addons/kustomization.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 140
+      },
+      "writtenOn": "2020-07-31T15:06:08Z",
+      "side": 1,
+      "message": "actually, can you comment the call for this file, and put a comment telling that just can be used with baremetal? I found that sriov has a validator, that causes it to fail if cannot find the device... and as we work with vms, we don\u0027t have devices.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 9
+      },
+      "revId": "5225fa1d1d292cd7a965196c959fab0a30c34a17",
+      "serverId": "4cada01b-0314-4fe0-84a1-f9ddc89863f9",
+      "unresolved": true
+    }
+  ]
+}
