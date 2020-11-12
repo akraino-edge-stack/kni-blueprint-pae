@@ -51,16 +51,16 @@ provisioningInfrastructure:
   provHost:
     interfaces:
       # Interface on the provisioning host that connects to the provisioning network
-      provisioning: dummy0
+      provisioning: em2
       # Must be in provisioningIpCidr range
       # pxe boot server will be at port 8080 on this address
       provisioningIpAddress: 172.22.0.1
       # Interface on the provisioning host that connects to the baremetal network
-      baremetal: eno1
+      baremetal: em1
       # Must be in baremetalIpCidr range
       baremetalIpAddress: 192.168.111.199
       # Interface on the provisioning host that connects to the internet/external network
-      external: eno3
+      external: em3
     bridges:
       # These bridges are created on the bastion host
       provisioning: provisioning
