@@ -18,7 +18,7 @@ metadata:
 # OLM: BEGIN CEPH CRD
 # The CRD declarations
 ---
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: cephclusters.ceph.rook.io
@@ -181,7 +181,7 @@ spec:
 # OLM: END CEPH CRD
 # OLM: BEGIN CEPH FS CRD
 ---
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: cephfilesystems.ceph.rook.io
@@ -249,7 +249,7 @@ spec:
 # OLM: END CEPH FS CRD
 # OLM: BEGIN CEPH NFS CRD
 ---
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: cephnfses.ceph.rook.io
@@ -286,7 +286,7 @@ spec:
 # OLM: END CEPH NFS CRD
 # OLM: BEGIN CEPH OBJECT STORE CRD
 ---
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: cephobjectstores.ceph.rook.io
@@ -348,7 +348,7 @@ spec:
 # OLM: END CEPH OBJECT STORE CRD
 # OLM: BEGIN CEPH OBJECT STORE USERS CRD
 ---
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: cephobjectstoreusers.ceph.rook.io
@@ -364,7 +364,7 @@ spec:
 # OLM: END CEPH OBJECT STORE USERS CRD
 # OLM: BEGIN CEPH BLOCK POOL CRD
 ---
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: cephblockpools.ceph.rook.io
@@ -380,7 +380,7 @@ spec:
 # OLM: END CEPH BLOCK POOL CRD
 # OLM: BEGIN CEPH VOLUME POOL CRD
 ---
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: volumes.rook.io
@@ -398,7 +398,7 @@ spec:
 # OLM: END CEPH VOLUME POOL CRD
 # OLM: BEGIN OBJECTBUCKET CRD
 ---
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: objectbuckets.objectbucket.io
@@ -422,7 +422,7 @@ spec:
 # OLM: END OBJECTBUCKET CRD
 # OLM: BEGIN OBJECTBUCKETCLAIM CRD
 ---
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: objectbucketclaims.objectbucket.io
@@ -447,7 +447,7 @@ spec:
 # OLM: BEGIN OBJECTBUCKET ROLEBINDING
 ---
 kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: rook-ceph-object-bucket
 roleRef:
@@ -462,7 +462,7 @@ subjects:
 # OLM: BEGIN OPERATOR ROLE
 ---
 # The cluster role for managing all the cluster-specific resources in a namespace
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: rook-ceph-cluster-mgmt
@@ -475,7 +475,7 @@ aggregationRule:
       rbac.ceph.rook.io/aggregate-to-rook-ceph-cluster-mgmt: "true"
 rules: []
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: rook-ceph-cluster-mgmt-rules
